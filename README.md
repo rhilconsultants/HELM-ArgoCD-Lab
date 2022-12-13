@@ -48,14 +48,14 @@ $ curl http://localhost:8080
 
 5. now let build a Contianer for our app and push it to our quay.io image registry
 
-  |. create a Dockerfile in our Home folder
+  i. create a Dockerfile in our Home folder
 ```
 $ cd ..
 
 $ touch Dockerfile
 
 ```
-  ||. Open the Dockerfile with VScode and create as the following Dockerfile
+  ii. Open the Dockerfile with VScode and create as the following Dockerfile
 ```
 FROM registry.access.redhat.com/ubi8/nodejs-16
 
