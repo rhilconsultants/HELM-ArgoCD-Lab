@@ -4,20 +4,20 @@
 
 ### lets build our application
 
-1. create a new folder named src
+#### 1. create a new folder named src
 
 ```
 $ mkdir src
 ```
 
-2. create a new file called app.js
+#### 2. create a new file called app.js
 
 ```
 $ touch app.js
 $ node init
 ```
 
-3. open the file in VScode and create a basic web application
+#### 3. open the file in VScode and create a basic web application
 
 ```
 const express = require('express');
@@ -35,7 +35,7 @@ app.listen(port);
 console.log(`Running at Port ${port}`);
 ```
 
-4. test the application localy to see if it works
+#### 4. test the application localy to see if it works
 
 ```
 $ npm install express router
@@ -46,7 +46,7 @@ $ node app.js
 $ curl http://localhost:8080
 ```
 
-5. now let build a Contianer for our app and push it to our quay.io image registry
+#### 5. now let build a Contianer for our app and push it to our quay.io image registry
 
 i. create a Dockerfile in our Home folder
 ```
