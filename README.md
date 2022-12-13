@@ -86,6 +86,7 @@ iii. build the continer image
 $ podman build . -t quay.io/<userName>/<imageName>:<Tag>
 ```
 and wait for it to finish
+
 iiii. push the image to quay.io registry
 ```
 $ podman login -u <userName> -p <Password> quay.io
