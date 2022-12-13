@@ -14,6 +14,7 @@ $ mkdir src
 
 ```
 $ touch app.js
+$ node init
 ```
 
 3. open the file in VScode and create a basic web application
@@ -22,13 +23,14 @@ $ touch app.js
 const express = require('express');
 const app = express();
 const router = express.Router();
+var port = process.env.PORT || 8080;
 
 router.get('/', function (req, res) {
   res.send(`Hello World!`);
 });
 
 app.use('/', router);
-app.listen(8080);
+app.listen(port);
 
 console.log(`Running at Port ${port}`);
 ```
@@ -36,10 +38,47 @@ console.log(`Running at Port ${port}`);
 4. test the application localy to see if it works
 
 ```
+$ npm install express router
 $ node app.js
 ```
 
 ```
 $ curl http://localhost:8080
+```
+
+5. now let build a Contianer for our app and push it to our quay.io image registry
+
+  |. create a Dockerfile in our Home folder
+```
+$ cd ..
+
+$ touch Dockerfile
+
+```
+  ||. Open the Dockerfile with VScode and create as the following Dockerfile
+```
+FROM registry.access.redhat.com/ubi8/nodejs-16
+
+# Create app directory
+WORKDIR /tmp
+
+USER root
+# copy packge.json to the workdir
+COPY src/package*.json ./
+
+
+# install npm dependencies
+RUN npm install && npm audit fix --force
+
+# Copy application file to the 
+COPY src .
+
+# create local env varibel for the PORT
+ENV PORT 8080
+
+USER 1001
+
+EXPOSE 8080
+CMD [ "node", "app.js" ]
 ```
 
