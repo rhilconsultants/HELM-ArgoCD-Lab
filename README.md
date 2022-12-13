@@ -48,14 +48,14 @@ $ curl http://localhost:8080
 
 5. now let build a Contianer for our app and push it to our quay.io image registry
 
-  i. create a Dockerfile in our Home folder
+i. create a Dockerfile in our Home folder
 ```
 $ cd ..
 
 $ touch Dockerfile
 
 ```
-  ii. Open the Dockerfile with VScode and create as the following Dockerfile
+ii. Open the Dockerfile with VScode and create as the following Dockerfile
 ```
 FROM registry.access.redhat.com/ubi8/nodejs-16
 
@@ -81,4 +81,21 @@ USER 1001
 EXPOSE 8080
 CMD [ "node", "app.js" ]
 ```
+iii. build the continer image
+```
+$ podman build . -t quay.io/<userName>/<imageName>:<Tag>
+```
+and wait for it to finish
+iiii. push the image to quay.io registry
+```
+$ podman login -u <userName> -p <Password> quay.io
+
+'Login Successful'
+
+$ podman push quay.io/<userName>/<imageName>:<Tag>
+...
+
+pushed successfuly!
+```
+
 
