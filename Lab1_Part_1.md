@@ -1,8 +1,8 @@
-# HELM-ArgoCD-Lab1
+# HELM-ArgoCD-Lab1-Part-1
 
 ## In this lab we will create a NodeJS application and deploy it to the Openshift cluster
 
-### lets build our application
+### Part 1 lets build our application
 
 #### 1. create a new folder named src
 
