@@ -6,21 +6,21 @@
 
 #### 1. create a new folder named yaml
 
-```
-cd ~
-mkdir yaml
+```Bash
+$ cd ~
+$ mkdir yaml
 ```
 
 #### 2. create a new files called deployment.yaml route.yaml service.yaml
 
-```
-cd yaml
-touch deployment.yaml route.yaml service.yaml
+```Bash
+$ cd yaml
+$ touch deployment.yaml route.yaml service.yaml
 ```
 
 #### 3. open the deployment.yaml file in VScode and create a deployment menifast, Dont forget to edit with your UseName
 
-```
+```YAML
 kind: Deployment
 apiVersion: apps/v1
 metadata:
@@ -62,7 +62,7 @@ spec:
 
 #### 4. open the service.yaml file in VScode and create a route menifast, Dont forget to edit with your UseName
 
-```
+```YAML
 kind: Service
 apiVersion: v1
 metadata:
@@ -80,7 +80,7 @@ spec:
 
 #### 4. open the route.yaml file in VScode and create a route menifast, Dont forget to edit with your UseName
 
-```
+```YAML
 kind: Route
 apiVersion: route.openshift.io/v1
 metadata:
@@ -111,51 +111,4 @@ i. Open your ArgoCD instance via the link it the Dashboard
 > Don't check "auto-sync" yet
 > Click on save
 
-ii. Open the Dockerfile with VScode and create as the following Dockerfile
 
-```
-FROM registry.access.redhat.com/ubi8/nodejs-16
-
-# Create app directory
-WORKDIR /tmp
-
-USER root
-# copy packge.json to the workdir
-COPY src/package*.json ./
-
-
-# install npm dependencies
-RUN npm install && npm audit fix --force
-
-# Copy application file to the 
-COPY src .
-
-# create local env varibel for the PORT
-ENV PORT 8080
-
-USER 1001
-
-EXPOSE 8080
-CMD [ "node", "app.js" ]
-```
-
-iii. build the continer image
-
-```
-podman build . -t quay.io/<userName>/<imageName>:<Tag>
-```
-
-and wait for it to finish
-
-iiii. push the image to quay.io registry
-
-```
-$ podman login -u <userName> -p <Password> quay.io
-
-'Login Successful'
-
-$ podman push quay.io/<userName>/<imageName>:<Tag>
-...
-
-pushed successfuly!
-```

@@ -6,20 +6,20 @@
 
 #### 1. create a new folder named src
 
-```
-$ mkdir src
+```Bash
+mkdir src
 ```
 
 #### 2. create a new file called app.js
 
-```
-$ touch app.js
-$ node init
+```Bash
+touch app.js
+node init
 ```
 
 #### 3. open the file in VScode and create a basic web application
 
-```
+```js
 const express = require('express');
 const app = express();
 const router = express.Router();
@@ -38,25 +38,28 @@ console.log(`Running at Port ${port}`);
 #### 4. test the application localy to see if it works
 
 ```
-$ npm install express router
-$ node app.js
+npm install express router
+node app.js
 ```
 
 ```
-$ curl http://localhost:8080
+curl http://localhost:8080
 ```
 
 #### 5. now let build a Contianer for our app and push it to our quay.io image registry
 
 i. create a Dockerfile in our Home folder
-```
-$ cd ..
-
-$ touch Dockerfile
 
 ```
+cd ..
+
+touch Dockerfile
+
+```
+
 ii. Open the Dockerfile with VScode and create as the following Dockerfile
-```
+
+```Dockerfile
 FROM registry.access.redhat.com/ubi8/nodejs-16
 
 # Create app directory
@@ -81,14 +84,18 @@ USER 1001
 EXPOSE 8080
 CMD [ "node", "app.js" ]
 ```
+
 iii. build the continer image
+
+```Bash
+podman build . -t quay.io/<userName>/<imageName>:<Tag>
 ```
-$ podman build . -t quay.io/<userName>/<imageName>:<Tag>
-```
+
 and wait for it to finish
 
 iiii. push the image to quay.io registry
-```
+
+```Bash
 $ podman login -u <userName> -p <Password> quay.io
 
 'Login Successful'
@@ -98,5 +105,3 @@ $ podman push quay.io/<userName>/<imageName>:<Tag>
 
 pushed successfuly!
 ```
-
-
