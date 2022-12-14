@@ -103,7 +103,7 @@ i. Open your ArgoCD instance via the link found in the Dashboard
 
 > Create a new Application.
 
-> enter your Application name as the Following <userName>-hello-world.
+> enter your Application name as the Following "<userName>-hello-world".
 
 > Enter your GitHub repo Url.
 
