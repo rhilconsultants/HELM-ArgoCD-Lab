@@ -111,4 +111,3 @@ i. Open your ArgoCD instance via the link it the Dashboard
 > Don't check "auto-sync" yet
 > Click on save
 
-
