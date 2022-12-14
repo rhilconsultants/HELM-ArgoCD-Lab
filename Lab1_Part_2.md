@@ -99,7 +99,7 @@ spec:
 
 #### 6. Lets Deploy our application to the Cluster with ArgoCD
 
-i. Open your ArgoCD instance via the link it the Dashboard
+i. Open your ArgoCD instance via the link found in the Dashboard
 
 > Create a new Application
 > enter your Application name as the Following <userName>-hello-world
@@ -111,3 +111,8 @@ i. Open your ArgoCD instance via the link it the Dashboard
 > Don't check "auto-sync" yet
 > Click on save
 
+and wait for the applicaion will show in the UI
+
+ii. click on the application and and then click the "Sync" button ,and wait for the application to deploy to the cluster
+
+iii. try to find the URL for the application and access it from your broswer.
