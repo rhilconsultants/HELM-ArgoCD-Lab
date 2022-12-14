@@ -101,15 +101,15 @@ spec:
 
 i. Open your ArgoCD instance via the link found in the Dashboard
 
-> Create a new Application.
-> enter your Application name as the Following "{userName}-hello-world".
-> Enter your GitHub repo Url.
-> select the branch that you are working on (e.i "main").
-> select the "yaml/" folder.
-> selcet the "in-cluster"
-> enter your deployment desired Namespace.
-> Don't check "auto-sync" yet.
-> Click on save.
+> 1. Create a new Application.
+> 2. enter your Application name as the Following "{userName}-hello-world".
+> 3. Enter your GitHub repo Url.
+> 4. select the branch that you are working on (e.i "main").
+> 5. select the "yaml/" folder.
+> 6. selcet the "in-cluster"
+> 7. enter your deployment desired Namespace.
+> 8. Don't check "auto-sync" yet.
+> 9. Click on save.
 
 and wait for the applicaion will show in the UI
 
