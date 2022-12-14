@@ -49,7 +49,7 @@ spec:
               protocol: TCP
           imagePullPolicy: IfNotPresent
 # update with the iamge you build in part 1
-          image: 'quay.io/<usrName>/<imageName>:<Tag>'
+          image: 'quay.io/<userName>/<imageName>:<Tag>'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
   strategy:
