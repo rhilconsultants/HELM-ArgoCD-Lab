@@ -161,16 +161,11 @@ we should see our web site
 ```Bash
 cd src
 mkdir html
+cd html
 touch index.html
 ```
 
-2. Open the index.html and create the following context
-
-```Bash
-cd html
-```
-
-and edit the file
+2. Open the index.html and create the following html web site.
 
 ```html
 <html>
