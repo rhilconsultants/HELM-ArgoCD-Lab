@@ -321,6 +321,6 @@ git push
 
 ![Web application v2](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-2-web.png)
 
-## Great Jog You have Finished Part 2
+**## Great Jog You have Finished Part 2
 
-### Now you can start part 3
+### Now you can start part 3**

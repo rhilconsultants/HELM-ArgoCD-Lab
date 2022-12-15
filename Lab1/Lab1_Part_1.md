@@ -144,6 +144,6 @@ git commit -m "added Dockerfile"
 git push
 ```
 
-## Great Jog You have Finished Part 1
+**## Great Jog You have Finished Part 1
 
 ### Now you can start part 2
