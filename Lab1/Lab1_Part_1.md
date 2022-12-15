@@ -110,7 +110,7 @@ CMD [ "node", "app.js" ]
 iii. build the continer image
 
 ```Bash
-docker build . -t quay.io/<userName>/<imageName>:<Tag>
+docker build . -t quay.io/<userName>/<imageName>:v1
 ```
 
 and wait for it to finish
@@ -130,7 +130,7 @@ $ docker login -u <userName> -p <Password> quay.io
 
 'Login Successful'
 
-$ docker push quay.io/<userName>/<imageName>:<Tag>
+$ docker push quay.io/<userName>/<imageName>:v1
 ...
 
 pushed successfuly!

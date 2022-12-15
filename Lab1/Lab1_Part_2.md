@@ -126,6 +126,7 @@ iii. try to find the URL for the application and access it from your broswer.
 - Click on it and look at the Live menifast
 
 it should look like that:
+
 ```YAML
 apiVersion: route.openshift.io/v1
 kind: Route
@@ -153,7 +154,7 @@ spec:
 we should see our web site
 ![hello-world](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-1-web.png)
 
-### 7. now that we have our application running on our Openshift Cluster, now we will create a HTML web and serve it from our Deployment.
+### 7. now that we have our application running on our Openshift Cluster, now we will create a HTML web and serve it from our Deployment
 
 1. return to our src folder and create a new folder named html inside it.
 
@@ -199,3 +200,61 @@ git commit -m "a html file"
 git push
 ```
 
+3. Edit our app.js application with the Following lines
+
+remove this part
+
+```js
+router.get('/', function (req, res) {
+  res.send(`Hello World!`);
+});
+```
+
+and enter this section
+
+```js
+// Route application to index.html file.
+router.get('/',function(req,res){
+  res.sendFile(path.join(__dirname+'/html/index.html'));
+  //__dirname : It will resolve to your project folder.
+});
+```
+
+add and commit our new file.
+
+```Bash
+git add .
+git commit -m "updated the app.js application"
+git push
+```
+
+### 8. Build a new image and push it to the registry
+
+1. navigate to the Docker file location:
+
+```Bash
+docker build . -t quay.io/<userName>/<imageName>:v2
+```
+
+2. push the new image to the quay registry:
+
+```Bash
+docker push quay.io/<userName>/<imageName>:v2
+```
+
+3. Update the Deployment.yaml file with the new iamge tag and wait for ArgoCD to update the Deployment.(you can refresh the application manualy).
+
+```YAML
+    spec:
+      containers:
+          name: hello-world
+          image: 'quay.io/<userName>/<imageName>:v2'
+```
+
+add and commit our new file.
+
+```Bash
+git add .
+git commit -m "updated the iamge tag in Deployment"
+git push
+```
