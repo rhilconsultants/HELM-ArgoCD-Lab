@@ -15,8 +15,17 @@ mkdir src
 ```Bash
 cd src
 touch app.js
-node init
+npm init
 ```
+
+Fill the fields:
+ - package-name = hellow-world
+ - version = 1.0.0
+ - description = application for workshop
+ - entrypoint = app.js
+ - all the rest leave empty
+
+
 
 #### 3. open the file in VScode and create a basic web application
 
