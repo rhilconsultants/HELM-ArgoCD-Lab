@@ -297,7 +297,8 @@ docker build . -t quay.io/<userName>/<imageName>:v2
 docker push quay.io/<userName>/<imageName>:v2
 ```
 
-3. Update the Deployment.yaml file with the new iamge tag and wait for ArgoCD to update the Deployment.(you can refresh the application manualy):
+3. Update the Deployment.yaml file with the new image tag and wait for ArgoCD to update the Deployment.
+(you can refresh the application manualy):
 
 ```YAML
     spec:
@@ -315,7 +316,7 @@ git push
 ```
 
 - Click on Sync to Update the Openshift Cluster.
-- wait for the pods to rollout and the new ver. has finished to rollout
+- wait for the pods to rollout and the new ver. had been deployed
 - test the URL again to see the new Web Page.
 
 ![Web application v2](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-2-web.png)
