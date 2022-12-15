@@ -136,6 +136,14 @@ $ docker push quay.io/<userName>/<imageName>:<Tag>
 pushed successfuly!
 ```
 
+Add our changes to the Git
+
+```Bash
+git add .
+git commit -m "added Dockerfile"
+git push
+```
+
 ## Great Jog You have Finished Part 1
 
 ### Now you can start part 2
