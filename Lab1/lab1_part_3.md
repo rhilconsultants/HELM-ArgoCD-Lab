@@ -26,7 +26,7 @@ mkdir templates
 3. Copy all 3 YAML files from our yaml folder to our helm/templates
 
 ```Bash
-cp ../yaml/* .
+cp ../yaml/* ./templates/
 ```
 
 4. Open the Chart.yaml file and Copy the Following Context:
@@ -85,7 +85,6 @@ spec:
       maxUnavailable: 25%
       maxSurge: 25%
   revisionHistoryLimit: 10
-  progressDeadlineSeconds: 600
 ```
 
 add ,commit and push the file to the git repo
@@ -169,7 +168,7 @@ ReplicaNumber: 3
 
 containers:
   containerPort: 8080
-  image: 'quay.io/argo-helm-workshop/hello-world:'
+  image: 'quay.io/<userName>/<imageName>:v2'
   tag: 'base'
 
 service:
@@ -183,3 +182,146 @@ git add.
 git commit -m "edited the HELM values.yaml file"
 git push
 ```
+
+9. Now we test if our Chart is working without any issues.
+
+```Bash
+helm template user{n}-hello-world .
+```
+
+in the out put we will get all our template Yaml rendered with our values from the values.yaml
+
+For example:
+
+```YAML
+---
+# Source: hello-world/templates/service.yaml
+kind: Service
+apiVersion: v1
+metadata:
+  name: user1-hello-world-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    app: user1-hello-world
+---
+# Source: hello-world/templates/deployment.yaml
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: user1-hello-world
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: user1-hello-world
+  template:
+    metadata:
+      labels:
+        app: user1-hello-world
+    spec:
+      containers:
+        - resources: {}
+          terminationMessagePath: /dev/termination-log
+          name: user1-hello-world
+          ports:
+            - containerPort: 8080
+              protocol: TCP
+          imagePullPolicy: Always
+          image: quay.io/argo-helm-workshop/workshop-app:v7
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+---
+# Source: hello-world/templates/route.yaml
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: user1-hello-world-route
+spec:
+  to:
+    kind: Service
+    name:  user1-hello-world-service
+    weight: 100
+  port:
+    targetPort: 8080
+  wildcardPolicy: None
+```
+
+10. Create an ArgoCD application for the HELM Chart.
+
+- in the ArgoCD UI Click "+ NEW APP"
+- fill the field as following:
+
+> Application Name: user{n}-hello-chart
+> Project Name: default
+> Sync Policy: Automatic and check the prune and auto-heal check boxxes
+> Repository URL, copy your git clone URL.
+> revision: main
+> Path: helm
+> Destination: 'https://kubernetes.default.svc'
+> Namespace: user{n}-application
+
+and click create.
+
+- wait a few seconds for the deployment ot finish.
+- find the url for the new application
+
+11. Build a New image for our Helm Chart Application.
+
+- Navigate to our HTML folder under the src folder
+- Replace "K8S Application" With "Helm Chart Application"
+- Replace "this message will be modiifed" With "Deployed with HELM and ArgoCD"
+- Add under "<img src=>" a new image:
+<img src="https://www.nclouds.com/img/services/toolkit/argocd.png">
+
+add ,commit and push the file to the git repo
+
+```bash
+git add.
+git commit -m "edited the html file"
+git push
+```
+
+- Now build a new image:
+
+```Bash
+docker build . -t quay.io/(userName)/(iamgeName):chart_v1
+```
+
+- Now lets push our image to the registry
+
+```Bash
+docker push quay.io/(userName)/(iamgeName):chart_v1
+```
+
+and wait for it to finish
+
+- Open our values.yaml file and update the container.tag value to "chart_v1"
+
+```YAML
+containers:
+  containerPort: 8080
+  image: 'quay.io/(userName)/(iamgeName)'
+  tag: 'chart_v1'
+```
+
+add ,commit and push the file to the git repo
+
+```bash
+git add.
+git commit -m "edited the HELM values.yaml file with new image tag version"
+git push
+```
+
+- wait for ArgoCD to refresh by itself(240 sec) or refresh it manualy, but this time it will sync by itself.
+- wait for the deployemnt rollout is completed and refresh the URL.
+
