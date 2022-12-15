@@ -327,6 +327,6 @@ git push
 
 ![Helm-Chart-web](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-3-web.png)
 
-**## Great Jog You have Finished Part 3
+# Great Jog You have Finished Part 3
 
 ### If you have lest go do the Bouns Lab...
