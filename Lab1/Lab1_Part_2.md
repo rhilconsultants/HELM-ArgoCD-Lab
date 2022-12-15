@@ -112,7 +112,7 @@ i. Open your ArgoCD instance via the link found in the Dashboard
 > 4. select the branch that you are working on (e.i "main").
 > 5. select the "yaml/" folder.
 > 6. selcet the "in-cluster / 'https://kubernetes.default.svc'"
-> 7. enter your application namespace - "user1-application.
+> 7. enter your application namespace - "user1-application".
 > 8. under sunc policy, leave it manual for now.
 > 9. Click on create.
 
