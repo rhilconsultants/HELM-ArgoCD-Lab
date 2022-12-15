@@ -299,7 +299,7 @@ docker build . -t quay.io/<userName>/<imageName>:v2
 docker push quay.io/<userName>/<imageName>:v2
 ```
 
-3. Update the Deployment.yaml file with the new iamge tag and wait for ArgoCD to update the Deployment.(you can refresh the application manualy).
+3. Update the Deployment.yaml file with the new iamge tag and wait for ArgoCD to update the Deployment.(you can refresh the application manualy):
 
 ```YAML
     spec:
