@@ -151,5 +151,51 @@ spec:
 - find the 'host:' key and copy the url to the browser, with http:// before the url.
 
 we should see our web site
-![hello-world]()
+![hello-world](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-1-web.png)
+
+### 7. now that we have our application running on our Openshift Cluster, now we will create a HTML web and serve it from our Deployment.
+
+1. return to our src folder and create a new folder named html inside it.
+
+```Bash
+cd src
+mkdir html
+touch index.html
+```
+
+2. Open the index.html and create the following context
+
+```html
+<html>
+<head>
+  <title>Hello-World Application</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+</div>
+  <div style="margin:100px;">
+   
+<class="navbar navbar-inverse navbar-static-top">
+  <div class="container">
+    <a class="navbar-brand" href="/">Hello-World Application</a>
+  </div>
+</nav>
+    <div class="jumbotron"  style="padding:40px;">
+      <h1>Hello, world!</h1>
+      <p>This is a simple hello World Web Page, this message will be modiifed.</p>
+  </div>
+</body>
+</html>
+```
+
+add and commit our new file.
+
+```Bash
+git add .
+git commit -m "a html file"
+git push
+```
 
