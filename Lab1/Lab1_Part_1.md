@@ -37,12 +37,12 @@ console.log(`Running at Port ${port}`);
 
 #### 4. test the application localy to see if it works
 
-```
+```Bash
 npm install express router
 node app.js
 ```
 
-```
+```Bash
 curl http://localhost:8080
 ```
 
@@ -50,11 +50,9 @@ curl http://localhost:8080
 
 i. create a Dockerfile in our Home folder
 
-```
+```Bash
 cd ..
-
 touch Dockerfile
-
 ```
 
 ii. Open the Dockerfile with VScode and create as the following Dockerfile
