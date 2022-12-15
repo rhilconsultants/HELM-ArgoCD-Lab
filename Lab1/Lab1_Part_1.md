@@ -13,6 +13,7 @@ mkdir src
 #### 2. create a new file called app.js
 
 ```Bash
+cd src
 touch app.js
 node init
 ```
