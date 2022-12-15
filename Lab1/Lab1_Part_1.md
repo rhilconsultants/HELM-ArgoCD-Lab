@@ -56,12 +56,26 @@ node app.js
 curl http://localhost:8080
 ```
 
+add a .gitignore to the root folder to not sync the Node Modules folder.
+
+```Bash
+cd ..
+touch .gitignore
+echo "src/node_modules" >> .gitignore
+```
+
+Commit and push the new file to the Repo
+```Bash
+git add .
+git commit -m "hello-world app"
+git push
+```
+
 #### 5. now let build a Contianer for our app and push it to our quay.io image registry
 
 i. create a Dockerfile in our Home folder
 
 ```Bash
-cd ..
 touch Dockerfile
 ```
 
@@ -96,20 +110,30 @@ CMD [ "node", "app.js" ]
 iii. build the continer image
 
 ```Bash
-podman build . -t quay.io/<userName>/<imageName>:<Tag>
+docker build . -t quay.io/<userName>/<imageName>:<Tag>
 ```
 
 and wait for it to finish
 
+navigate to www.quay.io, and login with your username and password
+- Click on "+ Create New Repository".
+- enter the image name you enter in the docker build step.
+- Select public
+- Select (Empty repository)
+- Click "Create Public Repositoy"
+
 iiii. push the image to quay.io registry
 
 ```Bash
-$ podman login -u <userName> -p <Password> quay.io
+$ docker login -u <userName> -p <Password> quay.io
 
 'Login Successful'
 
-$ podman push quay.io/<userName>/<imageName>:<Tag>
+$ docker push quay.io/<userName>/<imageName>:<Tag>
 ...
 
 pushed successfuly!
 ```
+
+## Great Jog You have Finished Part 1!
+### Now you can start part 2
