@@ -283,6 +283,7 @@ git push
 ```Bash
 touch .dockerignore
 echo "*/node_modules" >> .dockerignore
+```
 
 ```Bash
 docker build . -t quay.io/<userName>/<imageName>:v2
