@@ -325,3 +325,8 @@ git push
 - wait for ArgoCD to refresh by itself(240 sec) or refresh it manualy, but this time it will sync by itself.
 - wait for the deployemnt rollout is completed and refresh the URL.
 
+![Helm-Chart-web](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-3-web.png)
+
+## Great Jog You have Finished Part 3
+
+### If you have lest go do the Bouns Lab...
