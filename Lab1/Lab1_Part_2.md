@@ -319,3 +319,9 @@ git push
 - Click on Sync to Update the Openshift Cluster.
 - wait for the pods to rollout and the new ver. has finished to rollout
 - test the URL again to see the new Web Page.
+
+![Web application v2](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-2-web.png)
+
+## Great Jog You have Finished Part 2
+
+### Now you can start part 3
