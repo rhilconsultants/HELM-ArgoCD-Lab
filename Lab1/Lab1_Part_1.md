@@ -136,7 +136,7 @@ $ docker push quay.io/<userName>/<imageName>:v1
 pushed successfuly!
 ```
 
-Add our changes to the Git
+Add ,commit and push our changes to the Git
 
 ```Bash
 git add .

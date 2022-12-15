@@ -94,7 +94,7 @@ spec:
   wildcardPolicy: None
 ```
 
-add and commit and push the new files to the git repo
+add ,commit and push the new files to the git repo
 
 ```bash
 git add.
@@ -193,7 +193,7 @@ touch index.html
 </html>
 ```
 
-add and commit our new file.
+add ,commit our new file.
 
 ```Bash
 git add .
@@ -266,7 +266,7 @@ app.listen(port);
 console.log(`Running at Port ${port}`);
 ```
 
-add and commit our new file.
+add ,commit and push our new file.
 
 ```Bash
 git add .
@@ -307,7 +307,7 @@ docker push quay.io/<userName>/<imageName>:v2
           image: 'quay.io/<userName>/<imageName>:v2'
 ```
 
-add and commit our new file.
+add ,commit and push our new file.
 
 ```Bash
 git add .
