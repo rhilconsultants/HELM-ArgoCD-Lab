@@ -1,3 +1,5 @@
+# Welcom to Application Deployment with ArgoCD and HELM Workshop
+
 ![Lab logo](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/Argo-CD-Version-Tags-1000X1000.png)
 
 ## Lab 1 Links
