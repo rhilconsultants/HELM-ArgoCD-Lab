@@ -166,6 +166,12 @@ touch index.html
 
 2. Open the index.html and create the following context
 
+```Bash
+cd html
+```
+
+and edit the file
+
 ```html
 <html>
 <head>
@@ -186,7 +192,7 @@ touch index.html
 </nav>
     <div class="jumbotron"  style="padding:40px;">
       <h1>Hello, world!</h1>
-      <p>This is a simple hello World Web Page, this message will be modiifed.</p>
+      <h2>This is a simple hello World Web Page, this message will be modiifed.</h2>
   </div>
 </body>
 </html>
@@ -200,24 +206,69 @@ git commit -m "a html file"
 git push
 ```
 
-3. Edit our app.js application with the Following lines
-
-remove this part
+3. update our NodeJS with this Application
 
 ```js
-router.get('/', function (req, res) {
-  res.send(`Hello World!`);
-});
-```
+const express = require('express');
+const app = express();
+const path = require('path');
+const router = express.Router();
+var port = process.env.PORT || 8080;
 
-and enter this section
 
-```js
+// Default values for init status values
+var liveliness_new = 200
+var readiness_new = 200
+
+
 // Route application to index.html file.
 router.get('/',function(req,res){
   res.sendFile(path.join(__dirname+'/html/index.html'));
   //__dirname : It will resolve to your project folder.
 });
+
+// Health Probe - Application Liveliness
+router.get('/health/liveliness',function(req,res){
+    console.log(`code ----> ${liveliness_new}`)
+    res.status(parseInt(liveliness_new))
+      if (liveliness_new > 399){
+        res.send('Not Healty')
+      }
+      else{ res.send('Healty')}
+  });
+
+// Health Probe - Application Readiness
+router.get('/health/readiness',function(req,res){
+  console.log(`code ----> ${readiness_new}`)
+  res.status(parseInt(readiness_new))
+    if (readiness_new > 399){
+      res.send('Not Ready')
+    }
+    else{ res.send('Ready')}
+    
+  });  
+// Change Health probe status
+router.get('/liveliness/:statuse', function(req,res){
+  var l_statuse = req.params['statuse'];
+  console.log(l_statuse)
+  liveliness_new = l_statuse;
+  console.log(`New status code set ${l_statuse}`)
+  res.redirect('/')
+});
+// Change Readiness probe status
+router.get('/readiness/:statuse', function(req,res){
+  var r_statuse = req.params['statuse'];
+  console.log(r_statuse)
+  readiness_new = r_statuse;
+  console.log(`New status code set ${r_statuse}`)
+  res.redirect('/')
+});
+
+//add the router
+app.use('/', router);
+app.listen(port);
+
+console.log(`Running at Port ${port}`);
 ```
 
 add and commit our new file.
@@ -230,7 +281,13 @@ git push
 
 ### 8. Build a new image and push it to the registry
 
-1. navigate to the Docker file location:
+1. navigate to the Dockerfile location:
+
+- now we will add a .dockerignore file so the image will be slimmer
+
+```Bash
+touch .dockerignore
+echo "*/node_modules" >> .dockerignore
 
 ```Bash
 docker build . -t quay.io/<userName>/<imageName>:v2
@@ -258,3 +315,7 @@ git add .
 git commit -m "updated the iamge tag in Deployment"
 git push
 ```
+
+- Click on Sync to Update the Openshift Cluster.
+- wait for the pods to rollout and the new ver. has finished to rollout
+- test the URL again to see the new Web Page.
