@@ -285,6 +285,8 @@ touch .dockerignore
 echo "*/node_modules" >> .dockerignore
 ```
 
+- And build our new image
+
 ```Bash
 docker build . -t quay.io/<userName>/<imageName>:v2
 ```
