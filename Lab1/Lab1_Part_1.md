@@ -19,13 +19,12 @@ npm init
 ```
 
 Fill the fields:
- - package-name = hellow-world
- - version = 1.0.0
- - description = application for workshop
- - entrypoint = app.js
- - all the rest leave empty
 
-
+- package-name = hellow-world
+- version = 1.0.0
+- description = application for workshop
+- entrypoint = app.js
+- all the rest leave empty
 
 #### 3. open the file in VScode and create a basic web application
 
@@ -65,6 +64,7 @@ echo "src/node_modules" >> .gitignore
 ```
 
 Commit and push the new file to the Repo
+
 ```Bash
 git add .
 git commit -m "hello-world app"
@@ -116,6 +116,7 @@ docker build . -t quay.io/<userName>/<imageName>:<Tag>
 and wait for it to finish
 
 navigate to www.quay.io, and login with your username and password
+
 - Click on "+ Create New Repository".
 - enter the image name you enter in the docker build step.
 - Select public
@@ -135,5 +136,6 @@ $ docker push quay.io/<userName>/<imageName>:<Tag>
 pushed successfuly!
 ```
 
-## Great Jog You have Finished Part 1!
+## Great Jog You have Finished Part 1
+
 ### Now you can start part 2
