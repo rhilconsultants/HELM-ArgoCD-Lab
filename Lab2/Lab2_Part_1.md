@@ -142,4 +142,4 @@
 
 ## Congertes You finshed Part 1 of Lab 2
 
-## Now Move over to Part 2.
+## Now Move over to Part 2
