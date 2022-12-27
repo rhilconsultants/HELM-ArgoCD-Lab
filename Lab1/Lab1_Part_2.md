@@ -276,20 +276,20 @@ git push
 
 ### 8. Build a new image and push it to the registry
 
-1. navigate to the Dockerfile location:
+1. navigate to the Dockerfile location.
 
-:now we will add a .dockerignore file so the image will be slimmer
+    1. now we will add a .dockerignore file so the image will be slimmer
 
-```Bash
-touch .dockerignore
-echo "*/node_modules" >> .dockerignore
-```
+        ```Bash
+        touch .dockerignore
+        echo "*/node_modules" >> .dockerignore
+        ```
 
-:And build our new image
+    2. And build our new image
 
-```Bash
-docker build . -t quay.io/<userName>/<imageName>:v2
-```
+        ```Bash
+        docker build . -t quay.io/<userName>/<imageName>:v2
+        ```
 
 2. push the new image to the quay registry:
 
