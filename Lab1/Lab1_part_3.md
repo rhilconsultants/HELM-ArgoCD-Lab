@@ -280,7 +280,7 @@
 
     - Navigate to our HTML folder under the src folder
     - Replace "K8S Application" With "Helm Chart Application"
-    - Replace "this message will be modiifed" With "Deployed with HELM and ArgoCD"
+    - Replace "this message will be modifed" With "Deployed with HELM and ArgoCD"
     - Add under < img src= > a new image: "< img src="https://www.nclouds.com/img/services/toolkit/argocd.png" >"
 
 add ,commit and push the file to the git repo
