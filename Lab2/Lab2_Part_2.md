@@ -22,7 +22,7 @@
                      readinessProbe:
                        httpGet:
                          path: /health/readiness # this check the application url path
-                         port: {{ .Values.containers.containerPort }} # In which port the Application is listening
+                         port: {{ .Values.containers.containerPort | quote }}}} # In which port the Application is listening
                          scheme: HTTP
                        initialDelaySeconds: 1 # the time is waiting befor testing the application path
                        timeoutSeconds: 1 # the time for timeout
@@ -41,7 +41,7 @@
                        livenessProbe:
                          httpGet:
                            path: /health/liveliness
-                           port: {{ .Values.containers.containerPort }}
+                           port: {{ .Values.containers.containerPort | quote }}
                            scheme: HTTP
                          initialDelaySeconds: 1
                          timeoutSeconds: 1
