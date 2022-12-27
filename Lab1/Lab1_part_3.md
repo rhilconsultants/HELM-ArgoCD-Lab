@@ -262,14 +262,14 @@
     - in the ArgoCD UI Click "+ NEW APP"
     - fill the field as following:
 
-    > Application Name: user{n}-hello-chart
-    > Project Name: default
-    > Sync Policy: Automatic and check the prune and auto-heal check boxxes
-    > Repository URL, copy your git clone URL.
-    > revision: main
-    > Path: helm
-    > Destination: 'https://kubernetes.default.svc'
-    > Namespace: user{n}-application
+      - Application Name: user{n}-hello-chart
+      - Project Name: default
+      - Sync Policy: Automatic and check the prune and auto-heal check boxxes
+      - Repository URL, copy your git clone URL.
+      - revision: main
+      - Path: helm
+      - Destination: 'https://kubernetes.default.svc'
+      - Namespace: user{n}-application
 
     and click create.
 
