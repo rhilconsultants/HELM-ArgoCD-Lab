@@ -12,16 +12,17 @@
 mkdir helm
 ```
 
-2. enter the "helm" folder and create the following:
-- Chart.yaml
-- values.yaml
-- a folder named "templates"
+2. enter the "helm" folder and create the following.
 
-```Bash
-cd helm
-touch Chart.yaml values.yaml
-mkdir templates
-```
+  1. Chart.yaml
+  2. values.yaml
+  3. a folder named "templates"
+
+        ```Bash
+        cd helm
+        touch Chart.yaml values.yaml
+        mkdir templates
+        ```
 
 3. Copy all 3 YAML files from our yaml folder to our helm/templates
 

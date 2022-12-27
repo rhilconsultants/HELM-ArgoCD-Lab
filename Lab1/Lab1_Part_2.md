@@ -158,121 +158,121 @@ we should see our web site
 
 1. return to our src folder and create a new folder named html inside it.
 
-```Bash
-cd src
-mkdir html
-cd html
-touch index.html
-```
+      ```Bash
+      cd src
+      mkdir html
+      cd html
+      touch index.html
+      ```
 
 2. Open the index.html and create the following html web site.
 
-```html
-<html>
-<head>
-  <title>Hello-World Application</title>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-</div>
-  <div style="margin:100px;">
-   
-<class="navbar navbar-inverse navbar-static-top">
-  <div class="container">
-    <a class="navbar-brand" href="/">Hello-World Application</a>
-  </div>
-</nav>
-    <div class="jumbotron"  style="padding:40px;">
-      <h1>Hello, world!</h1>
-      <h2>This is a simple hello World Web Page, this message will be modifed.</h2>
-  </div>
-</body>
-</html>
-```
+      ```html
+      <html>
+      <head>
+        <title>Hello-World Application</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+      </head>
+      <body>
+      </div>
+        <div style="margin:100px;">
+         
+      <class="navbar navbar-inverse navbar-static-top">
+        <div class="container">
+          <a class="navbar-brand" href="/">Hello-World Application</a>
+        </div>
+      </nav>
+          <div class="jumbotron"  style="padding:40px;">
+            <h1>Hello, world!</h1>
+            <h2>This is a simple hello World Web Page, this message will be modifed.</h2>
+        </div>
+      </body>
+      </html>
+      ```
 
-add ,commit our new file.
+- add ,commit our new file.
 
-```Bash
-git add .
-git commit -m "a html file"
-git push
-```
+  ```Bash
+  git add .
+  git commit -m "a html file"
+  git push
+  ```
 
-3. update our NodeJS with this Application
+3. update our NodeJS with this Application.
 
-```js
-const express = require('express');
-const app = express();
-const path = require('path');
-const router = express.Router();
-var port = process.env.PORT || 8080;
-
-
-// Default values for init status values
-var liveliness_new = 200
-var readiness_new = 200
-
-
-// Route application to index.html file.
-router.get('/',function(req,res){
-  res.sendFile(path.join(__dirname+'/html/index.html'));
-  //__dirname : It will resolve to your project folder.
-});
-
-// Health Probe - Application Liveliness
-router.get('/health/liveliness',function(req,res){
-    console.log(`code ----> ${liveliness_new}`)
-    res.status(parseInt(liveliness_new))
-      if (liveliness_new > 399){
-        res.send('Not Healty')
-      }
-      else{ res.send('Healty')}
+  ```js
+  const express = require('express');
+  const app = express();
+  const path = require('path');
+  const router = express.Router();
+  var port = process.env.PORT || 8080;
+  
+  
+  // Default values for init status values
+  var liveliness_new = 200
+  var readiness_new = 200
+  
+  
+  // Route application to index.html file.
+  router.get('/',function(req,res){
+    res.sendFile(path.join(__dirname+'/html/index.html'));
+    //__dirname : It will resolve to your project folder.
   });
+  
+  // Health Probe - Application Liveliness
+  router.get('/health/liveliness',function(req,res){
+      console.log(`code ----> ${liveliness_new}`)
+      res.status(parseInt(liveliness_new))
+        if (liveliness_new > 399){
+          res.send('Not Healty')
+        }
+        else{ res.send('Healty')}
+    });
+  
+  // Health Probe - Application Readiness
+  router.get('/health/readiness',function(req,res){
+    console.log(`code ----> ${readiness_new}`)
+    res.status(parseInt(readiness_new))
+      if (readiness_new > 399){
+        res.send('Not Ready')
+      }
+      else{ res.send('Ready')}
+      
+    });  
+  // Change Health probe status
+  router.get('/liveliness/:statuse', function(req,res){
+    var l_statuse = req.params['statuse'];
+    console.log(l_statuse)
+    liveliness_new = l_statuse;
+    console.log(`New status code set ${l_statuse}`)
+    res.redirect('/')
+  });
+  // Change Readiness probe status
+  router.get('/readiness/:statuse', function(req,res){
+    var r_statuse = req.params['statuse'];
+    console.log(r_statuse)
+    readiness_new = r_statuse;
+    console.log(`New status code set ${r_statuse}`)
+    res.redirect('/')
+  });
+  
+  //add the router
+  app.use('/', router);
+  app.listen(port);
+  
+  console.log(`Running at Port ${port}`);
+  ```
 
-// Health Probe - Application Readiness
-router.get('/health/readiness',function(req,res){
-  console.log(`code ----> ${readiness_new}`)
-  res.status(parseInt(readiness_new))
-    if (readiness_new > 399){
-      res.send('Not Ready')
-    }
-    else{ res.send('Ready')}
-    
-  });  
-// Change Health probe status
-router.get('/liveliness/:statuse', function(req,res){
-  var l_statuse = req.params['statuse'];
-  console.log(l_statuse)
-  liveliness_new = l_statuse;
-  console.log(`New status code set ${l_statuse}`)
-  res.redirect('/')
-});
-// Change Readiness probe status
-router.get('/readiness/:statuse', function(req,res){
-  var r_statuse = req.params['statuse'];
-  console.log(r_statuse)
-  readiness_new = r_statuse;
-  console.log(`New status code set ${r_statuse}`)
-  res.redirect('/')
-});
+- add ,commit and push our new file.
 
-//add the router
-app.use('/', router);
-app.listen(port);
-
-console.log(`Running at Port ${port}`);
-```
-
-add ,commit and push our new file.
-
-```Bash
-git add .
-git commit -m "updated the app.js application"
-git push
-```
+  ```Bash
+  git add .
+  git commit -m "updated the app.js application"
+  git push
+  ```
 
 ### 8. Build a new image and push it to the registry
 
@@ -293,9 +293,9 @@ git push
 
 2. push the new image to the quay registry:
 
-```Bash
-docker push quay.io/<userName>/<imageName>:v2
-```
+      ```Bash
+      docker push quay.io/<userName>/<imageName>:v2
+      ```
 
 3. Update the Deployment.yaml file with the new image tag and wait for ArgoCD to update the Deployment, (you can refresh the application manualy):
 
