@@ -278,14 +278,14 @@ git push
 
 1. navigate to the Dockerfile location:
 
-: now we will add a .dockerignore file so the image will be slimmer
+:now we will add a .dockerignore file so the image will be slimmer
 
 ```Bash
 touch .dockerignore
 echo "*/node_modules" >> .dockerignore
 ```
 
-: And build our new image
+:And build our new image
 
 ```Bash
 docker build . -t quay.io/<userName>/<imageName>:v2
