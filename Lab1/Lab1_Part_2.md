@@ -17,7 +17,7 @@ cd yaml
 touch deployment.yaml route.yaml service.yaml
 ```
 
-#### 3. open the deployment.yaml file in VScode and create a deployment menifast, Dont forget to edit with your UseName
+#### 3. open the deployment.yaml file in VScode and create a deployment menifast, Dont forget to edit with your UserName
 
 ```YAML
 kind: Deployment
@@ -57,7 +57,7 @@ spec:
   revisionHistoryLimit: 10
 ```
 
-#### 4. open the service.yaml file in VScode and create a route menifast, Dont forget to edit with your UseName
+#### 4. open the service.yaml file in VScode and create a route menifast, Dont forget to edit with your UserName
 
 ```YAML
 kind: Service
@@ -75,7 +75,7 @@ spec:
     app: <userName>-hello-world
 ```
 
-#### 4. open the route.yaml file in VScode and create a route menifast, Dont forget to edit with your UseName
+#### 4. open the route.yaml file in VScode and create a route menifast, Dont forget to edit with your UserName
 
 ```YAML
 kind: Route
@@ -144,7 +144,7 @@ spec:
     targetPort: 8080
   to:
     kind: Service
-    name: user1-hello-world
+    name: user*-hello-world
     weight: 100
   wildcardPolicy: None
 ```
@@ -187,7 +187,7 @@ touch index.html
 </nav>
     <div class="jumbotron"  style="padding:40px;">
       <h1>Hello, world!</h1>
-      <h2>This is a simple hello World Web Page, this message will be modiifed.</h2>
+      <h2>This is a simple hello World Web Page, this message will be modifed.</h2>
   </div>
 </body>
 </html>
@@ -297,8 +297,7 @@ docker build . -t quay.io/<userName>/<imageName>:v2
 docker push quay.io/<userName>/<imageName>:v2
 ```
 
-3. Update the Deployment.yaml file with the new image tag and wait for ArgoCD to update the Deployment.
-(you can refresh the application manualy):
+3. Update the Deployment.yaml file with the new image tag and wait for ArgoCD to update the Deployment, (you can refresh the application manualy):
 
 ```YAML
     spec:
@@ -321,6 +320,7 @@ git push
 
 ![Web application v2](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-2-web.png)
 
-# Great Jog You have Finished Part 2
+## Great Jog You have Finished Part 2
 
-### Now you can start part 3**
+### Now you can start part 3 [Here](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab1/Lab1_part_3.md)
+
