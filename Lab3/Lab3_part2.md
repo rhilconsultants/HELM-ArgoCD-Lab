@@ -1,4 +1,4 @@
-# HELM-ArgoCD-Lab3-Part-1
+# HELM-ArgoCD-Lab3-Part-2
 
 ## In this lab we will Automate Deployment from helm Changes
 
@@ -33,8 +33,8 @@
      ```YAML
      ...
        selector:
-         app-1: {{ .Release.Name }}-1
-         app-2: {{ .Release.Name }}-2
+         app: "{{ .Release.Name }}-1"
+         app: "{{ .Release.Name }}-2"
      ...
      ```
 
@@ -47,8 +47,6 @@
     annotations:
       argocd.argoproj.io/sync-wave: "1"
     ```
-
-
 
    - Update the index.html file again and see what happens.
      - Replace "testing automated rollout" with "ArgoCD SyncWaves"
