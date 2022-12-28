@@ -62,7 +62,7 @@
    metadata:
      annotations:
        argocd.argoproj.io/hook: PostSync
-       argocd.argoproj.io/hook-delete-policy: HookSucceeded
+       argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
      name: test-url
    spec:
      template:
@@ -75,12 +75,13 @@
           image: registry.access.redhat.com/ubi8-minimal:8.7-1031
           workingDir: /workspace/output
           command: ["/bin/bash", "-c"]
-          args: ["curl $SERVICE:$PORT || exit 1"]
+          args: ["curl ${SERVICE}:${PORT}/health/liveliness | grep ${TEST} || exit 1"]
           env:
             - name: SERVICE
               value: {{ .Release.Name }}-service
             - name: PORT
               value: {{ .Values.service.servicePort }}
+     backoffLimit: 4
    ```
 
    - add, commit and push to the git.
@@ -100,8 +101,95 @@
    - add to the values.yaml the following section:
 
    ```YAML
-   test: ArgoCD SyncHooks Test
+   test: Healty
    ```
 
    - Update the index.html file again and see what happens.
      - Replace "ArgoCD SyncWaves" with "ArgoCD SyncHooks Test"
+
+   - see that the sync is successfull.✅💚
+
+   - Now change the value of key test so it will fail the sync.
+
+   - sync the application and let the sync run.
+
+   - Now let add a syncFail job that will create a new issue in our github repo, create a new file named notification.yaml, edit with the following
+
+   ```YAML
+   apiVersion: batch/v1
+   kind: Job
+   metadata:
+     name: github-issue-job
+     annotations:
+       argocd.argoproj.io/hook: SyncFail
+       argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+   spec:
+     template:
+       spec:
+         containers:
+         - name: github-issue
+           image: registry.access.redhat.com/ubi8-minimal:8.7-1031
+           envFrom:
+           - secretRef:
+               name: gh-details
+           - configMapRef:
+               name: issue-message
+           command: ["/bin/bash", "-c"]
+           args: ["curl -u $USERNAME:$TOKEN -X POST -d '{\"title\":\"$ISSUE_TITLE\",\"body\":\"$ISSUE_BODY\"}' $URL"]
+         restartPolicy: Never
+     backoffLimit: 4
+   ```
+
+   - create a new file name gh-details.yaml
+
+   ```YAML
+   apiVersion: v1
+   kind: Secret
+   metadata:
+     name: gh-details
+   type: Opaque
+   data:
+     USERNAME: {{ .Values.github.user | b64enc }}
+     TOKEN: {{ .Values.github.token | b64enc }}
+     URL: {{ .Values.github.url | b64enc }}
+   ```
+
+   - this part isn't best practice but for the workshop we will save our token to the value file.
+     - create the following section in the values.yaml file
+
+       ```YAML
+       ...
+       github:
+         user: # Your GitHub User name
+         token: empty-pass
+         url: <https://api.github.com/repos/{Git-userName}/{Repository-Name}/issues>
+       ...
+       ```
+   - After the first sync Open the application Details in the argoCD UI and change to the Parameters Tab and enter you token in the token field.
+     ![ArgoCD App params](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab3-part2-ui.png)
+   - Create a new ConfigMap named Notification-Message.yaml, vith the following context
+
+   ```YAML
+   apiVersion: v1
+   kind: ConfigMap
+   metadata:
+     name: issue-message
+   data:
+     ISSUE_TITLE: {{ .Values.issue.title }}
+     ISSUE_BODY: {{ .Values.issue.body }}
+   ```
+
+   - Add the Following Section to the values.yaml file
+
+   ```YAML
+   issue:
+     title: Application deployment statues
+     body: Application Test failed!!!
+   ```
+
+   - Update the index.html file again, and see the sync process.
+   - if every thing was successfull the test-url job should completed succeffully.
+   - Chnage the test values in the values.yaml file so the url test will fail.
+   - update the index.html file again and refresh the application in the ArgoCD UI.
+   - After the Sync finish see if there is a new Issue in the GitHub Portal.
+
