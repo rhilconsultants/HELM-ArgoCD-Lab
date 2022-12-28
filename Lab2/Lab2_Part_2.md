@@ -192,7 +192,7 @@
      3. "Set not Ready"
      4. "Check readiness"
    - the Site will look like this:
-   ![web2]|("https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-web2.png")
+     ![web2]("https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-web2.png")
 
    - Testing the Probes.
      1. With the ArgoCD ui open and the web page next to it, click the "Set not healty" button, notice the Pod in the ArgoCD UI.
@@ -206,5 +206,4 @@
 
 ## Congertes You finshed Part 2
 
-## Now Move over to Eat
-
+## **Now Move over to Eat**
