@@ -27,6 +27,10 @@ metadata:
   name: <userName>-hello-world
 spec:
   replicas: 3
+  selector:
+    matchLabels:
+# set your user name
+      app: <userName>-hello-world
   template:
     metadata:
       labels:

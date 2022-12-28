@@ -217,8 +217,8 @@
    spec:
      replicas: 3
      selector:
-       matchLabels:
-         app: user1-hello-world
+     matchLabels:
+       app: user1-hello-world
      template:
        metadata:
          labels:
