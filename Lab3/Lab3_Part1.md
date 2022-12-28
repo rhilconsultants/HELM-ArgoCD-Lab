@@ -34,4 +34,4 @@
 4. Update the index.html and see the deployment rollout the new change.
    - Change the "Testing Probes buttons" to "testing automated rollout"
 
-> TIP: [HElM Tips and tricks](https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments)
+> TIP: [HELM Tips and tricks](https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments)
