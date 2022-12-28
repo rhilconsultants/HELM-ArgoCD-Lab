@@ -166,7 +166,7 @@
    ```
 
    - After the first sync Open the application Details in the argoCD UI and change to the Parameters Tab and enter you token in the token field.
-     ![ArgoCD App params](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab3-part2-ui.png)
+   ![ArgoCD App params](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab3-part2-ui.png)
 
    - Update the index.html file again, and see the sync process.
    - if every thing was successfull the test-url job should completed succeffully.
