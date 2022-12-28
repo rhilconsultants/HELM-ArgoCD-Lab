@@ -227,9 +227,9 @@ we should see our web site
       console.log(`code ----> ${liveliness_new}`)
       res.status(parseInt(liveliness_new))
         if (liveliness_new > 399){
-          res.send('Not Healty')
+          res.send('Not Healthy')
         }
-        else{ res.send('Healty')}
+        else{ res.send('Healthy')}
     });
   
   // Health Probe - Application Readiness
