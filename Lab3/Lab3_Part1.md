@@ -35,3 +35,5 @@
    - Change the "Testing Probes buttons" to "testing automated rollout"
 
 > TIP: [HELM Tips and tricks](https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments)
+
+## Go to Part 2
