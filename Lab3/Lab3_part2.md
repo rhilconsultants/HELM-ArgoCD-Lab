@@ -50,3 +50,42 @@
 
    - Update the index.html file again and see what happens.
      - Replace "testing automated rollout" with "ArgoCD SyncWaves"
+   Add, Commit and Push to the git.
+
+   make other change to the index.html file ,add another header.
+   push the new change and watch the flow in the ArgoCD.
+
+2. Let's add a Job that curl the service and check if it works
+
+   - Create the following job.yaml, to the helm/templates
+
+   ```YAML
+   apiVersion: batch/v1
+   kind: Job
+   metadata:
+     annotations:
+       argocd.argoproj.io/hook: PostSync
+       argocd.argoproj.io/hook-delete-policy: HookSucceeded
+     name: test-url
+   spec:
+     template:
+       metadata:
+         name: test-url
+       spec:
+        restartPolicy: Never
+        containers:
+        - name: test-url
+          image: registry.access.redhat.com/ubi8-minimal:8.7-1031
+          workingDir: /workspace/output
+          command: ["/bin/bash", "-c"]
+          args: ["curl $SERVICE:$PORT || exit 1"]
+          securityContext:
+            privileged: true
+          env:
+            - name: SERVICE
+              value: {{ .Release.Name }}-service
+            - name: PORT
+              value: {{ .Values.service.servicePort }}
+   ```
+
+   - add, commit and push to the git.
