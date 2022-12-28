@@ -192,7 +192,8 @@
      3. "Set not Ready"
      4. "Check readiness"
    - the Site will look like this:
-     ![web2]("https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-web2.png")
+
+![web2](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-web2.png)
 
    - Testing the Probes.
      1. With the ArgoCD ui open and the web page next to it, click the "Set not healty" button, notice the Pod in the ArgoCD UI.
@@ -201,7 +202,7 @@
         - this time nothing will happen, try to refresh the web page and see what happens.
         - the web page should return an "Application is not available"
      3. In the ArgoCD ui open the Pod details, and switch to events, there should be some 💔 events.
-        ![pod events]("https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-pod-events.png")
+        ![pod events](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-pod-events.png)
      4. Delete the pod from the ArgoCD ui to return the application to work again
 
 ## Congertes You finshed Part 2
