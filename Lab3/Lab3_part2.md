@@ -154,8 +154,7 @@
      URL: {{ .Values.github.url | b64enc }}
    ```
 
-   - this part isn't best practice but for the workshop we will save our token to the value file.
-     - create the following section in the values.yaml file
+   - create the following section in the values.yaml file
 
        ```YAML
        ...
