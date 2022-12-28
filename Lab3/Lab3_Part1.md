@@ -2,7 +2,7 @@
 
 ## In this lab we will Automate Deployment from helm Changes
 
-## this lab will be diffrent, in this lab no code samples will be given and you will need to find the current solution by you self
+## this lab will be diffrent, in this lab no code samples will be given and you will need to find the current solution by yourself
 
 ---
 
