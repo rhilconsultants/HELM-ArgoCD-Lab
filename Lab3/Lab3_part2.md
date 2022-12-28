@@ -16,8 +16,6 @@
    ```
 
    - Update all the Section that contains {{ .Release.Name }} to {{ .Release.Name }}-1
-   - Update all the labels from "app" to "app-1"
-
    - Go to the deployment_2.yaml file under helm/templates
      - Add the following section, to deployment_2.yaml
 
@@ -27,7 +25,6 @@
     ```
 
    - Update all the Section that contains {{ .Release.Name }} to {{ .Release.Name }}-2
-   - Update all the labels from "app" to "app-1"
    - Edit the service.yaml file, change the selecto, as following:
 
      ```YAML
@@ -79,8 +76,6 @@
           workingDir: /workspace/output
           command: ["/bin/bash", "-c"]
           args: ["curl $SERVICE:$PORT || exit 1"]
-          securityContext:
-            privileged: true
           env:
             - name: SERVICE
               value: {{ .Release.Name }}-service
@@ -89,3 +84,24 @@
    ```
 
    - add, commit and push to the git.
+
+   - Update the index.html file again and see what happens.
+     - Replace "ArgoCD SyncWaves" with "ArgoCD SyncHooks"
+   - change the args to the Following:
+
+   ```YAML
+           args: ["curl $SERVICE:$PORT | grep $TEST || exit 1"]
+           ...
+             - name: TEST
+             value: "{{ .Values.test }}"
+           ...
+   ```
+
+   - add to the values.yaml the following section:
+
+   ```YAML
+   test: ArgoCD SyncHooks Test
+   ```
+
+   - Update the index.html file again and see what happens.
+     - Replace "ArgoCD SyncWaves" with "ArgoCD SyncHooks Test"

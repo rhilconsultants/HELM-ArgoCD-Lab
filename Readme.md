@@ -11,3 +11,17 @@
 [Part 3](https://github.com/rhilconsultants/HELM-ArgoCD-Lab1/blob/main/Lab1/lab1_part_3.md)
 
 ---
+
+## Lab 2 Links
+
+[Part 1](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab2/Lab2_Part_1.md)
+
+[Part 2](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab2/Lab2_Part_2.md)
+
+---
+
+## Lab 3 Links
+
+[Part 1](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab3/Lab3_Part1.md)
+
+[Part 2](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab3/Lab3_part2.md)
