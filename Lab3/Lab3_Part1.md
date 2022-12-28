@@ -31,5 +31,7 @@
 
 3. Change the annotations so it will rollout after the Configmap has been updated.
 
-> TIP: [HElM Tips and tricks](https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments)
+4. Update the index.html and see the deployment rollout the new change.
+   - Change the "Testing Probes buttons" to "testing automated rollout"
 
+> TIP: [HElM Tips and tricks](https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments)
