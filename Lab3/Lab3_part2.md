@@ -81,7 +81,7 @@
               value: {{ .Release.Name }}-service
             - name: PORT
               value: {{ .Values.service.servicePort }}
-     backoffLimit: 4
+     backoffLimit: 1
    ```
 
    - add, commit and push to the git.
@@ -137,7 +137,7 @@
            command: ["/bin/bash", "-c"]
            args: ["curl -u $USERNAME:$TOKEN -X POST -d '{\"title\":\"$ISSUE_TITLE\",\"body\":\"$ISSUE_BODY\"}' $URL"]
          restartPolicy: Never
-     backoffLimit: 4
+     backoffLimit: 1
    ```
 
    - create a new file name gh-details.yaml
@@ -168,29 +168,11 @@
 
    - After the first sync Open the application Details in the argoCD UI and change to the Parameters Tab and enter you token in the token field.
      ![ArgoCD App params](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab3-part2-ui.png)
-   - Create a new ConfigMap named Notification-Message.yaml, vith the following context
-
-   ```YAML
-   apiVersion: v1
-   kind: ConfigMap
-   metadata:
-     name: issue-message
-   data:
-     ISSUE_TITLE: {{ .Values.issue.title }}
-     ISSUE_BODY: {{ .Values.issue.body }}
-   ```
-
-   - Add the Following Section to the values.yaml file
-
-   ```YAML
-   issue:
-     title: Application deployment statues
-     body: Application Test failed!!!
-   ```
 
    - Update the index.html file again, and see the sync process.
    - if every thing was successfull the test-url job should completed succeffully.
-   - Chnage the test values in the values.yaml file so the url test will fail.
+   - Change the test values in the values.yaml file so the url test will fail.
    - update the index.html file again and refresh the application in the ArgoCD UI.
    - After the Sync finish see if there is a new Issue in the GitHub Portal.
 
+## Hope you enjoyed 🤪
