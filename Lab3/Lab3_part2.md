@@ -135,11 +135,12 @@
            - configMapRef:
                name: issue-message
            command: ["/bin/bash", "-c"]
-           args: ["curl -u $USERNAME:$TOKEN -X POST -d '{\"title\":\"$ISSUE_TITLE\",\"body\":\"$ISSUE_BODY\"}' $URL"]
+           args: ["curl -u $USERNAME:$TOKEN -X POST -d '{\"title\":\"Deployment sync Done\",\"body\":\"The web site not Healthy.\",\"assignees\":\"{UserName}\"}' $URL" ]
          restartPolicy: Never
      backoffLimit: 1
    ```
 
+   - Replace in the args, {UserName} with your GitHub User Name
    - create a new file name gh-details.yaml
 
    ```YAML
