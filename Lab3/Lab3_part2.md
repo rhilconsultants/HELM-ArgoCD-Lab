@@ -155,7 +155,7 @@
      URL: {{ .Values.github.url | b64enc }}
    ```
 
-   - create the following section in the values.yaml file
+   - create the following section in the values.yaml file, update the field with your details
 
    ```YAML
    ...
