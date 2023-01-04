@@ -4,11 +4,11 @@
 
 ## Lab 1 Links
 
-[Part 1](https://github.com/rhilconsultants/HELM-ArgoCD-Lab1/blob/main/Lab1/Lab1_Part_1.md)
+[Part 1](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab1/Lab1_Part_1.md)
 
-[Part 2](https://github.com/rhilconsultants/HELM-ArgoCD-Lab1/blob/main/Lab1/Lab1_Part_2.md)
+[Part 2](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab1/Lab1_Part_2.md)
 
-[Part 3](https://github.com/rhilconsultants/HELM-ArgoCD-Lab1/blob/main/Lab1/lab1_part_3.md)
+[Part 3](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab1/Lab1_part_3.md)
 
 ---
 
