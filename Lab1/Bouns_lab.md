@@ -24,7 +24,8 @@ apiVersion: route.openshift.io/v1
 metadata:
   name: blue-green-route
   annotations:
-    haproxy.router.openshift.io/balance: random
+    haproxy.router.openshift.io/disable_cookies='true'
+    haproxy.router.openshift.io/balance: 'roundrobin'
 spec:
   to:
     kind: Service
