@@ -91,7 +91,7 @@
    - change the args to the Following:
 
    ```YAML
-           args: ["curl $SERVICE:$PORT | grep $TEST || exit 1"]
+           args: ["curl $SERVICE:$PORT/health/liveliness | grep $TEST || exit 1"]
            ...
              - name: TEST
              value: "{{ .Values.test }}"
