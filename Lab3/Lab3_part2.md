@@ -94,7 +94,7 @@
            args: ["curl $SERVICE:$PORT/health/liveliness | grep $TEST || exit 1"]
            ...
              - name: TEST
-             value: "{{ .Values.test }}"
+               value: "{{ .Values.test }}"
            ...
    ```
 
