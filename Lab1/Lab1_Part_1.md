@@ -20,13 +20,13 @@ npm init
 
 Fill the fields:
 
-- package-name = hellow-world
+- package-name = hello-world
 - version = 1.0.0
 - description = application for workshop
 - entrypoint = app.js
 - all the rest leave empty
 
-#### 3. open the file in VScode and create a basic web application
+#### 3. open the file in VScode(codespaces) and create a basic web application
 
 ```js
 const express = require('express');
@@ -50,6 +50,8 @@ console.log(`Running at Port ${port}`);
 npm install express router
 node app.js
 ```
+
+the codespaces enviourment will notify you with a link to the Application access or you can:
 
 ```Bash
 curl http://localhost:8080
@@ -110,12 +112,12 @@ CMD [ "node", "app.js" ]
 iii. build the continer image
 
 ```Bash
-docker build . -t quay.io/<userName>/<imageName>:v1
+docker build . -t quay.io/<quay-userName>/<imageName>:v1
 ```
 
 and wait for it to finish
 
-navigate to www.quay.io, and login with your username and password
+navigate to www.quay.io, and login with your qauy username and password
 
 - Click on "+ Create New Repository".
 - enter the image name you enter in the docker build step.
