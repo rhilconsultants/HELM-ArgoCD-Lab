@@ -51,7 +51,7 @@
    fill the form with this parameters
 
       - Application Name = blue-green
-      - vproject name = default
+      - project name = default
       - Sync Policy = Automatic (check the prune & Auto Heal)
       - Repository URL = Your Git Clone URL
       - Revision = main
