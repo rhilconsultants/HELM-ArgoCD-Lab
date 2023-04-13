@@ -1,4 +1,4 @@
-# HELM-ArgoCD-Lab1-Bouns
+# HELM-ArgoCD-Lab1-Bonus
 
 ## In this lab we will create a Canary Route or our 2 Applications
 
