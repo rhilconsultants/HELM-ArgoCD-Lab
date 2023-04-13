@@ -86,4 +86,4 @@
 
    TIP, try to scale on deployment from 3 to 1 and see what is going on.
 
-## Great Job You have Finished Bouns Lab
+## Great Job You have Finished the Bonus Lab
