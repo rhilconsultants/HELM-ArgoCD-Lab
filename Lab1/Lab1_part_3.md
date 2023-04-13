@@ -43,13 +43,13 @@
 
 5. Edit the "templates/Deployment.yaml" file as Following:
 
-   - the value of "metadata.name:" change to {{ .Release.Name }}
-   - the value of "spec.replica:" cchange to {{ .Values.ReplicaNumber }}
-   - the value of "spec.selector.matchLabels: change to {{ .Release.Name }}
-   - the value of "spec.template.metadata.labels.app:" change to {{ .Release.Name }}
-   - the value of "spec.contianer.name:" change to {{ .Release.Name }}
-   - the value of "spec.contianer.ports.containerPort:" change to {{ .Values.containers.containerPort }}
-   - the value of "spec.contianer.iamge:" change to {{ .Values.containers.image }}:{{ .Values.containers.tag }}
+   - the value of "metadata: -> name:" change to {{ .Release.Name }}
+   - the value of "spec: -> replica:" cchange to {{ .Values.ReplicaNumber }}
+   - the value of "spec: -> selector: -> matchLabels: change to {{ .Release.Name }}
+   - the value of "spec: -> emplate: -> metadata: -> labels: -> app:" change to {{ .Release.Name }}
+   - the value of "spec: -> contianer: -> name:" change to {{ .Release.Name }}
+   - the value of "spec: -> contianer: -> ports: -> containerPort:" change to {{ .Values.containers.containerPort }}
+   - the value of "spec: -> contianer: -> image:" change to {{ .Values.containers.image }}:{{ .Values.containers.tag }}
 
    the edited file should look like this:
 
@@ -98,10 +98,10 @@
 
 6. Edit the "templates/service.yaml" file as Following:
 
-   - The value of "metadata.name" change to {{ .Release.Name }}-service
-   - The value of "spec.selector.app" change to {{ .Release.Name }}
-   - The value of "spec.ports.port" change it to {{ .Values.service.servicePort }}
-   - The value of "spec.ports.targetPort" change it to {{ .Values.containers.containerPort }}
+   - The value of "metadata: -> name" change to {{ .Release.Name }}-service
+   - The value of "spec: -> selector: -> app" change to {{ .Release.Name }}
+   - The value of "spec: -> ports: -> port" change it to {{ .Values.service.servicePort }}
+   - The value of "spec: -> ports: -> targetPort" change it to {{ .Values.containers.containerPort }}
 
    the edited file should look like this:
 
@@ -129,9 +129,9 @@
   
 7. Edit the "templates/route.yaml" file as Following:
 
-   - The value of "metadata.name" change it to {{ .Release.Name }}-route
-   - The value of "spec.to.name" change it to {{ .Release.Name }}-service
-   - The value of "spec.port.targetPort" change it to {{ .Values.service.servicePort }}
+   - The value of "metadata: -> name" change it to {{ .Release.Name }}-route
+   - The value of "spec: -> to: -> name" change it to {{ .Release.Name }}-service
+   - The value of "spec: -> port: -> targetPort" change it to {{ .Values.service.servicePort }}
 
    the edited file should look like this:
 
@@ -169,7 +169,7 @@
      
      containers:
        containerPort: 8080
-       image: 'quay.io/<userName>/<imageName>:v2'
+       image: 'quay.io/<quay-userName>/<imageName>:v2'
        tag: 'base'
      
      service:
@@ -267,13 +267,13 @@
       - Sync Policy: Automatic and check the prune and auto-heal check boxxes
       - Repository URL, copy your git clone URL.
       - revision: main
-      - Path: helm
+      - Path: helm/
       - Destination: 'https://kubernetes.default.svc'
       - Namespace: user{n}-application
 
     and click create.
 
-    - wait a few seconds for the deployment ot finish.
+    - wait a few seconds for the deployment to finish.
     - find the url for the new application
 
 11. Build a New image for our Helm Chart Application.
@@ -281,7 +281,7 @@
     - Navigate to our HTML folder under the src folder
     - Replace "K8S Application" With "Helm Chart Application"
     - Replace "this message will be modifed" With "Deployed with HELM and ArgoCD"
-    - Add under < img src= > a new image: "< img src="https://www.nclouds.com/img/services/toolkit/argocd.png" >"
+    - Add under <img src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?itok=g0Ee8H1H" alt="OpenShift"> a new image: "< img src="https://www.nclouds.com/img/services/toolkit/argocd.png" >"
 
 add ,commit and push the file to the git repo
 
