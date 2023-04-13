@@ -282,6 +282,7 @@
     - Replace "K8S Application" With "Helm Chart Application"
     - Replace "this message will be modifed" With "Deployed with HELM and ArgoCD"
     - Add under < img src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?itok=g0Ee8H1H" alt="OpenShift" > a new image: "< img src="https://www.nclouds.com/img/services/toolkit/argocd.png" >"
+    - Don't forget to clean the white spaces after "<" and before ">" of the  new image.
 
 add ,commit and push the file to the git repo
 
@@ -294,13 +295,13 @@ git push
 - Now build a new image:
 
 ```Bash
-docker build . -t quay.io/(userName)/(iamgeName):chart_v1
+docker build . -t quay.io/(quay-userName)/(imageName):chart_v1
 ```
 
 - Now lets push our image to the registry
 
 ```Bash
-docker push quay.io/(userName)/(iamgeName):chart_v1
+docker push quay.io/(quay-userName)/(imageName):chart_v1
 ```
 
 and wait for it to finish
@@ -310,7 +311,7 @@ and wait for it to finish
 ```YAML
 containers:
   containerPort: 8080
-  image: 'quay.io/(userName)/(iamgeName)'
+  image: 'quay.io/(quay-userName)/(imageName)'
   tag: 'chart_v1'
 ```
 
