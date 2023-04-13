@@ -25,7 +25,7 @@
     ```
 
    - Update all the Section that contains {{ .Release.Name }} to {{ .Release.Name }}-2
-   - Edit the service.yaml file, change the selecto, as following:
+   - Edit the service.yaml file, change the selector section, as following:
 
      ```YAML
      ...
@@ -35,7 +35,7 @@
      ...
      ```
 
-   - Push to git and See what happens
+   - Push to git and See what happens, Open the Helm application in the ArgoCD UI and follow the sync steps, notice the flow of the sync.
 
    - Go to the ConfigMap.yaml file under helm/templates
      - Add the following section:
@@ -50,6 +50,11 @@
    Add, Commit and Push to the git.
 
    make other change to the index.html file ,add another header.
+
+     ```html
+     <h3>Testing sync waves</h3>
+     ```
+
    push the new change and watch the flow in the ArgoCD.
 
 2. Let's add a Job that curl the service and check if it works
@@ -109,9 +114,11 @@
 
    - see that the sync is successfull.✅💚
 
-   - Now change the value of key test so it will fail the sync.
+   - Now change the value of key test so it will fail the sync, Set test: Null
 
    - sync the application and let the sync run.
+
+   - Set the key, test: Healty ,in the values.yaml file
 
    - Now let add a syncFail job that will create a new issue in our github repo, create a new file named notification.yaml, edit with the following
 
@@ -138,8 +145,7 @@
      backoffLimit: 1
    ```
 
-   - Replace in the args, {UserName} with your GitHub User Name
-   - create a new file name gh-details.yaml
+   - create a new file name gh-details.yaml, for this step you need to create your github accont token, [How to create github token](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
    ```YAML
    apiVersion: v1
@@ -168,6 +174,11 @@
    ![ArgoCD App params](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab3-part2-ui.png)
 
    - Update the index.html file again, and see the sync process.
+
+       ```html
+       <h3>Testing fail hook</h3>
+       ```
+
    - if every thing was successfull the test-url job should completed succeffully.
    - Change the test values in the values.yaml file so the url test will fail.
    - update the index.html file again and refresh the application in the ArgoCD UI.
