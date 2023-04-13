@@ -29,11 +29,11 @@
      spec:
        to:
          kind: Service
-         name: user1-hello-chart-service
+         name: user{n}-hello-chart-service
          weight: 90
        alternateBackends:
        - kind: Service
-         name: user1-hello-world
+         name: user{n}-hello-world
          weight: 10
      ```
 
