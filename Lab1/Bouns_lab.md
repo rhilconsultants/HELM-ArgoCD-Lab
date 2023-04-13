@@ -50,13 +50,13 @@
    - In the ArgoCD UI click on "+ New APP" :
    fill the form with this parameters
 
-      > Application Name = blue-green
-      > vproject name = default
-      > Sync Policy = Automatic (check the prune & Auto Heal)
-      > Repository URL = Your Git Clone URL
-      > Revision = main
-      > ClusterUrl= 'https://kubernetes.default.svc'
-      > Namespace = user{n}-application
+      - Application Name = blue-green
+      - vproject name = default
+      - Sync Policy = Automatic (check the prune & Auto Heal)
+      - Repository URL = Your Git Clone URL
+      - Revision = main
+      - ClusterUrl= 'https://kubernetes.default.svc'
+      - Namespace = user{n}-application
 
    And click create!
 
