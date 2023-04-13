@@ -194,7 +194,7 @@
    - the Site will look like this:
      ![web2](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-web2.png)
 
-   - Testing the Probes.( To better understand what is happing change the replica number from 3 to 1 in the values.yaml file).
+   - Testing the Probes.(To better understand what is happing change the replica number from 3 to 1 in the values.yaml file).
      1. With the ArgoCD ui open and the web page next to it, click the "Set not healty" button, notice the Pod in the ArgoCD UI, and wait.
         - the pod should be terminated and a new pod will start instead.
      2. With the ArgoCD ui open and the web page next to it, click the "Set not Ready" button, notice the Pod in the ArgoCD UI.
