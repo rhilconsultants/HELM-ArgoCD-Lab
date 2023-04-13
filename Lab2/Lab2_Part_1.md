@@ -69,6 +69,10 @@
 
    ```YAML
    ...  #this will Create Volume From our ConfigMap
+   spec:
+   ...  
+     template:
+     ...     
        spec:
          volumes:
            - name: index-html
@@ -78,9 +82,9 @@
    ...  # This will mount our File to the Pod File system
          containers:
          ...
-            volumeMounts:
-            - name: index-html
-              mountPath: /tmp/html # this will mount the html.index file to it application location
+             volumeMounts:
+             - name: index-html
+               mountPath: /tmp/html # this will mount the html.index file to it application location
          ...
    ...
    ```
@@ -113,7 +117,7 @@
    {{ (.Files.Glob "html/*").AsConfig | indent 2 }}
    ```
 
-   We set the source of the file to our src html folder.
+   We set the source of the file to a html folder in side the HELM chart.
 
    - Do to HELM Limitation we need to copy our HTML file into our HELM chart
 
