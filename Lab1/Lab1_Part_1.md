@@ -4,9 +4,11 @@
 
 ### Part 1 lets build our application
 
-#### 1. create a new folder named src
+#### 1. create a new folder named Application (this will be our root application folder) in this folder create another folder named "src"
 
 ```Bash
+mkdir Application
+cd Application
 mkdir src
 ```
 
