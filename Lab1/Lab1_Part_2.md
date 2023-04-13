@@ -149,7 +149,7 @@ spec:
   wildcardPolicy: None
 ```
 
-- find the 'host:' key and copy the url to the browser, with http:// before the url.
+- find the 'host:' key and copy the url to the browser, with "http://" before the url.
 
 we should see our web site
 ![hello-world](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-1-web.png)
