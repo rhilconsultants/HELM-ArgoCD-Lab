@@ -17,24 +17,24 @@ cd yaml
 touch deployment.yaml route.yaml service.yaml
 ```
 
-#### 3. open the deployment.yaml file in VScode and create a deployment menifast, Dont forget to edit with your UserName
+#### 3. open the deployment.yaml file in VScode(Codespaces) and create a deployment menifast, Dont forget to edit with your Lab UserName (From the table), and the image name and tag from quay
 
 ```YAML
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-# set your user name
+# set your lab user name
   name: <userName>-hello-world
 spec:
   replicas: 3
   selector:
     matchLabels:
-# set your user name
+# set your lab user name
       app: <userName>-hello-world
   template:
     metadata:
       labels:
-# set your user name
+# set your lab user name
         app: <userName>-hello-world
     spec:
       containers:
@@ -45,8 +45,8 @@ spec:
             - containerPort: 8080
               protocol: TCP
           imagePullPolicy: IfNotPresent
-# update with the iamge you build in part 1
-          image: 'quay.io/<userName>/<imageName>:<Tag>'
+# update with the image you build in part 1
+          image: 'quay.io/<quay-userName>/<imageName>:<Tag>'
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
   strategy:
@@ -57,7 +57,7 @@ spec:
   revisionHistoryLimit: 10
 ```
 
-#### 4. open the service.yaml file in VScode and create a route menifast, Dont forget to edit with your UserName
+#### 4. open the service.yaml file in VScode and create a route menifast, Dont forget to edit with your lab UserName
 
 ```YAML
 kind: Service
@@ -75,7 +75,7 @@ spec:
     app: <userName>-hello-world
 ```
 
-#### 5. open the route.yaml file in VScode and create a route menifast, Dont forget to edit with your UserName
+#### 5. open the route.yaml file in VScode and create a route menifast, Dont forget to edit with your lab UserName
 
 ```YAML
 kind: Route
@@ -107,12 +107,12 @@ git push
 i. Open your ArgoCD instance via the link found in the Dashboard
 
 > 1. Create a new Application.
-> 2. enter your Application name as the Following "{userName}-hello-world".
+> 2. enter your Application name as the Following "{lab-userName}-hello-world".
 > 3. Enter your GitHub repo Url.
-> 4. select the branch that you are working on (e.i "main").
+> 4. select the branch that you are working on (i.e "main").
 > 5. select the "yaml/" folder.
 > 6. selcet the "in-cluster / 'https://kubernetes.default.svc'"
-> 7. enter your application namespace - "user{}-application".
+> 7. enter your application namespace - "user{number}-application".
 > 8. under sync policy, leave it manual for now.
 > 9. Click on create.
 
@@ -120,7 +120,7 @@ and wait for the applicaion will show in the UI
 
 ii. click on the application and and then click the "Sync" button ,and wait for the application to deploy to the cluster
 
-iii. try to find the URL for the application and access it from your broswer.
+iii. try to find the URL for the application and access it from your broswer.(some times due to UI issue in ArgoCD the Route will dissapear, so go to the Openshift Console ,Developer, Topology and click the Arrow near the Application.)
 
 - go to the route box in the application diagram in the argocd UI.
 - Click on it and look at the Live menifast
@@ -170,10 +170,10 @@ we should see our web site
   ```html
   <html>
   <head>
-    <title>Hello-World Application</title>
+    <title>HELM Application</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
+    <link rel="stylesheet"   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-  theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   </head>
   <body>
@@ -182,18 +182,30 @@ we should see our web site
      
   <class="navbar navbar-inverse navbar-static-top">
     <div class="container">
-      <a class="navbar-brand" href="/">Hello-World Application</a>
+      <a class="navbar-brand" href="/">K8S Application</a>
+      <ul class="nav navbar-nav">
+        <li class="active">
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/health/liveliness">Check liveliness</a>
+        </li>
+        <li>
+          <a href="/health/readiness">Check readiness</a>
+        </li>
+      </ul>
     </div>
   </nav>
-      <div class="jumbotron"  style="padding:40px;">
-        <h1>Hello, world!</h1>
-        <h2>This is a simple hello World Web Page, this message will be modifed.</h2>
-    </div>
-  </body>
-  </html>
+        <div class="jumbotron"  style="padding:40px;">
+          <img   src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/op  enshift-featured.png?itok=g0Ee8H1H" alt="OpenShift">
+          <h1>Hello, world!</h1>
+          <h2>This is a simple hello World Web Page, this message will be modifed.</h2>
+      </div>
+    </body>
+    </html>
   ```
 
-- add ,commit our new file.
+- add ,commit and push our new file.
 
     ```Bash
     git add .
@@ -201,7 +213,7 @@ we should see our web site
     git push
     ```
 
-- update our NodeJS with this Application, Open app.js File and Copy this code block
+- update our NodeJS with this Application, Open app.js File and replace with this new code block
 
   ```js
   const express = require('express');
@@ -288,13 +300,13 @@ we should see our web site
     2. And build our new image
 
         ```Bash
-        docker build . -t quay.io/<userName>/<imageName>:v2
+        docker build . -t quay.io/<quay-userName>/<imageName>:v2
         ```
 
 2. push the new image to the quay registry:
 
       ```Bash
-      docker push quay.io/<userName>/<imageName>:v2
+      docker push quay.io/<quay-userName>/<imageName>:v2
       ```
 
 3. Update the Deployment.yaml file with the new image tag and wait for ArgoCD to update the Deployment, (you can refresh the application manualy):
@@ -303,7 +315,7 @@ we should see our web site
     spec:
       containers:
           name: hello-world
-          image: 'quay.io/<userName>/<imageName>:v2'
+          image: 'quay.io/<quay-userName>/<imageName>:v2'
 ```
 
 add ,commit and push our new file.
