@@ -9,22 +9,22 @@
 1. Update the HELM chart values.yaml with the following.
    - Set a new Parent Section named - "probes"
      - create a sub section named - "readiness"
-       - create a key names - "path", with the value of the current path
-       - create a key names - "initialDelaySeconds", with the value of the current initialDelaySeconds
-       - create a key names - "timeoutSeconds", with the value of the current timeoutSeconds
-       - create a key names - "periodSeconds", with the value of the current periodSeconds
-       - create a key names - "successThreshold", with the value of the current successThreshold
-       - create a key names - "failureThreshold", with the value of the current failureThreshold
+       - create a key names - "path", with the value of the current path from the deployment file
+       - create a key names - "initialDelaySeconds", with the value of the current initialDelaySeconds from the deployment file
+       - create a key names - "timeoutSeconds", with the value of the current timeoutSeconds from the deployment file
+       - create a key names - "periodSeconds", with the value of the current periodSeconds from the deployment file
+       - create a key names - "successThreshold", with the value of the current successThreshold from the deployment file
+       - create a key names - "failureThreshold", with the value of the current failureThreshold from the deployment file
      - create a sub section names - "liveness"
-       - create a key names - "path", with the value of the current path
-       - create a key names - "initialDelaySeconds", with the value of the current initialDelaySeconds
-       - create a key names - "timeoutSeconds", with the value of the current timeoutSeconds
-       - create a key names - "periodSeconds", with the value of the current periodSeconds
-       - create a key names - "successThreshold", with the value of the current successThreshold
-       - create a key names - "failureThreshold", with the value of the current failureThreshold
+       - create a key names - "path", with the value of the current path from the deployment file
+       - create a key names - "initialDelaySeconds", with the value of the current initialDelaySeconds from the deployment file
+       - create a key names - "timeoutSeconds", with the value of the current timeoutSeconds from the deployment file
+       - create a key names - "periodSeconds", with the value of the current periodSeconds from the deployment file
+       - create a key names - "successThreshold", with the value of the current successThreshold from the deployment file
+       - create a key names - "failureThreshold", with the value of the current failureThreshold from the deployment file
    - Set a new Parent Section named - "volume"
      - create a sub section named - "mount"
-       - create a key names - "path", with the value of the current mountPath
+       - create a key names - "path", with the value of the current mountPath from the deployment file
    - Add, commit and push to git to see if everything is working.
 
 2. Add annotations to the deployment that after each new commit ArgoCD will rollout.
