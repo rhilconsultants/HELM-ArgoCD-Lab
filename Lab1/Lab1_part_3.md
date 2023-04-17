@@ -267,9 +267,9 @@
       - Sync Policy: Automatic and check the prune and auto-heal check boxxes
       - Repository URL, copy your git clone URL.
       - revision: main
-      - Path: helm/
+      - Path: Application/helm/
       - Destination: 'https://kubernetes.default.svc'
-      - Namespace: user{n}-application
+      - Namespace: user{n}-applicatioApplication/n
 
     and click create.
 
