@@ -269,7 +269,7 @@
       - revision: main
       - Path: Application/helm/
       - Destination: 'https://kubernetes.default.svc'
-      - Namespace: user{n}-applicatioApplication/n
+      - Namespace: user{n}-application
 
     and click create.
 
