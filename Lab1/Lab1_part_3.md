@@ -330,4 +330,4 @@ git push
 
 ## Great Jog You have Finished Part 3
 
-### If you have lest go do the Bouns Lab [Here](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/main/Lab1/Bouns_lab.md)
+### If you have lest go do the Bouns Lab [Here](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/acfa93eab54740d9c0e3a252fbe580fb67c62964/Lab1/Bonus_Lab.md)
