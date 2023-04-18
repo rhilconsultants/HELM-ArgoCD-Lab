@@ -173,7 +173,7 @@ we should see our web site
     <title>K8S Application</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <link rel="stylesheet"   href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-  theme.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap-theme.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
   </head>
   <body>
@@ -197,7 +197,7 @@ we should see our web site
     </div>
   </nav>
         <div class="jumbotron"  style="padding:40px;">
-          <img   src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/op  enshift-featured.png?itok=g0Ee8H1H" alt="OpenShift">
+          <img   src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?itok=g0Ee8H1H" alt="OpenShift">
           <h1>Hello, world!</h1>
           <h2>This is a simple hello World Web Page, this message will be modifed.</h2>
       </div>
