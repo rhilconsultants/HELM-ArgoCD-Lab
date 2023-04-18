@@ -6,7 +6,7 @@
 
 ---
 
-1. Update the HELM chart values.yaml with the following.
+1. Update the HELM chart values.yaml with the following and change the current value in the deployment file with the new helm template structure.
    - Set a new Parent Section named - "probes"
      - create a sub section named - "readiness"
        - create a key names - "path", with the value of the current path from the deployment file
