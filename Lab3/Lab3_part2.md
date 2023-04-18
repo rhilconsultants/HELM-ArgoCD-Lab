@@ -23,9 +23,9 @@
 
     ```YAML
     metadata:
-    name:
-    annotations:
-      argocd.argoproj.io/sync-wave: "10"
+      name:
+      annotations:
+        argocd.argoproj.io/sync-wave: "10"
     ```
 
    - Update all the Section that contains {{ .Release.Name }} to {{ .Release.Name }}-2
