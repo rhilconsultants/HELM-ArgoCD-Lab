@@ -11,6 +11,8 @@
    - Add the following section, to deployment_1.yaml
 
    ```YAML
+   metadata:
+    name: *****
     annotations:
       argocd.argoproj.io/sync-wave: "5"
    ```
@@ -20,6 +22,8 @@
      - Add the following section, to deployment_2.yaml
 
     ```YAML
+    metadata:
+    name:
     annotations:
       argocd.argoproj.io/sync-wave: "10"
     ```
