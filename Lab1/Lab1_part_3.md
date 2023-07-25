@@ -281,10 +281,12 @@
     - Navigate to our HTML folder under the src folder
     - Replace "K8S Application" With "Helm Chart Application"
     - Replace "this message will be modifed" With "Deployed with HELM and ArgoCD"
-    - Add under < img src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?itok=g0Ee8H1H" alt="OpenShift" > a new image: "< img src="https://www.nclouds.com/img/services/toolkit/argocd.png" >"
+    - Add under < img src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?itok=g0Ee8H1H" alt="OpenShift" > 
+      a new image: 
+      "< img src="https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-sync-flow.png" >"
     - Don't forget to clean the white spaces after "<" and before ">" of the  new image.
 
-add ,commit and push the file to the git repo
+add,commit, and push the file to the git repo
 
 ```bash
 git add.
@@ -323,11 +325,11 @@ git commit -m "edited the HELM values.yaml file with new image tag version"
 git push
 ```
 
-- wait for ArgoCD to refresh by itself(240 sec) or refresh it manualy, but this time it will sync by itself.
-- wait for the deployemnt rollout is completed and refresh the URL.
+- wait for ArgoCD to refresh by itself(240 sec) or refresh it manually, but this time it will sync by itself.
+- wait for the deployment rollout to be completed and refresh the URL.
 
 ![Helm-Chart-web](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/lab1-part-3-web.png)
 
 ## Great Jog You have Finished Part 3
 
-### If you have lest go do the Bouns Lab [Here](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/acfa93eab54740d9c0e3a252fbe580fb67c62964/Lab1/Bonus_Lab.md)
+### If you have finished go do the Bouns Lab [Here](https://github.com/rhilconsultants/HELM-ArgoCD-Lab/blob/acfa93eab54740d9c0e3a252fbe580fb67c62964/Lab1/Bonus_Lab.md)
