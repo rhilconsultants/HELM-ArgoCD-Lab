@@ -22,6 +22,12 @@
        - create a key names - "periodSeconds", with the value of the current periodSeconds from the deployment file
        - create a key names - "successThreshold", with the value of the current successThreshold from the deployment file
        - create a key names - "failureThreshold", with the value of the current failureThreshold from the deployment file
+   - If you want to try working with tpl functions, replace all the templates with a tpl function
+      ```YAML
+      # tpl exmaple
+                livenessProbe:
+            {{- tpl (toYaml .Values.Probes.readiness) . | nindent 12 }}
+      ```
    - Set a new Parent Section named - "volume"
      - create a sub section named - "mount"
        - create a key names - "path", with the value of the current mountPath from the deployment file
