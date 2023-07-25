@@ -102,7 +102,7 @@
    </nav>
        <div class="jumbotron"  style="padding:40px;">
          <img src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?   itok=g0Ee8H1H" alt="OpenShift">
-         <img src="https://www.nclouds.com/img/services/toolkit/argocd.png">
+         <img src="https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-sync-flow.png">
          <img src="https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/helm-icon-color.png">
          <h1>Hello, world!</h1>
          <h2>Our New web site, Deployed with HELM and ArgoCD.</h2>
@@ -115,23 +115,24 @@
 
    ```Bash
    git add .
-   git commit -m "added probes and updated the web site"
+   git commit -m "added probes and updated the website"
+   git push
    ```
 
-5. Refrash the argoCD ui and let the application to sync.
+5. Refrash the argoCD ui and let the application sync.
 
-   - Now refresh or Open the URL again to see the new web site.
+   - Now refresh or Open the URL again to see the new website.
    ![Testing Probes](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-web1.png)
-   - Now lets test our probes to see if they are responding.
+   - Now let's test our probes to see if they are responding.
      - on the top part of the website there is a "Check liveliness" and "Check Readiness" links.
-     - Click on the "Check Liveliness" and it should show "Healty"
-     - Click on the "Check Readiness" and is should show "Ready"
+     - Click on the "Check Liveliness" and it should show "Healthy"
+     - Click on the "Check Readiness" and it should show "Ready"
 
 6. Testing the Functionality of the Probes.
 
-   - Lets add to our web some buttons to test our probes.
+   - Let's add to our web some buttons to test our probes.
 
-   ```html
+   ```HTML
    <html>
      <head>
        <title>Helm Chart Application</title>
@@ -163,7 +164,7 @@
    </nav>
          <div class="jumbotron"  style="padding:40px;">
            <img src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?      itok=g0Ee8H1H" alt="OpenShift">
-           <img src="https://www.nclouds.com/img/services/toolkit/argocd.png">
+           <img src="https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-sync-flow.png">
            <img src="https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/helm-icon-color.png">
            <h1>Hello, world!</h1>
            <h2>Our New web site, Deployed with HELM and ArgoCD.</h2>
@@ -186,18 +187,18 @@
    ```
 
    - refresh the argoCD and delete the Pod.
-   - you should have 4 new button on the button of the screen
-     1. "Set not Healty"
-     2. "Check livelinedd"
+   - you should have 4 new buttons on the button of the screen
+     1. "Set not Healthy"
+     2. "Check liveliness"
      3. "Set not Ready"
      4. "Check readiness"
    - the Site will look like this:
      ![web2](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab2-part2-web2.png)
 
    - Testing the Probes.(To better understand what is happing change the replica number from 3 to 1 in the values.yaml file).
-     1. With the ArgoCD ui open and the web page next to it, click the "Set not healty" button, notice the Pod in the ArgoCD UI, and wait.
+     1. With the ArgoCD ui open and the web page next to it, click the "Set not healthy" button, notice the Pod in the ArgoCD UI, and wait.
         - the pod should be terminated and a new pod will start instead.
-     2. With the ArgoCD ui open and the web page next to it, click the "Set not Ready" button, notice the Pod in the ArgoCD UI.
+     2. With the ArgoCD ui open and the web page next to it, click the "Set not Ready" button, and notice the Pod in the ArgoCD UI.
         - this time nothing will happen, try to refresh the web page and see what happens.
         - the web page should return an "Application is not available"
      3. In the ArgoCD ui open the Pod details, and switch to events, there should be some 💔 events.
