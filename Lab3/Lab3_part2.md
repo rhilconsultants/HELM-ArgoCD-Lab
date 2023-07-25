@@ -6,8 +6,8 @@
 
 ---
 
-1. Create another copy of deployment.yaml file under helm/templates and name it deployment_2.yaml
-   - Change the name of deployment.yaml to deployment_1.yaml
+1. Create another copy of the deployment.yaml file under helm/templates and name it deployment_2.yaml
+   - Change the name of the deployment.yaml to deployment_1.yaml
    - Add the following section, to deployment_1.yaml
 
    ```YAML
@@ -18,6 +18,7 @@
    ```
 
    - Update all the Section that contains {{ .Release.Name }} to {{ .Release.Name }}-1
+   - change the Selector label from app to app1: & app2: according to the deployment file.
    - Go to the deployment_2.yaml file under helm/templates
      - Add the following section, to deployment_2.yaml
 
@@ -29,13 +30,13 @@
     ```
 
    - Update all the Section that contains {{ .Release.Name }} to {{ .Release.Name }}-2
-   - Edit the service.yaml file, change the selector section, as following:
+   - Edit the service.yaml file, change the selector section, as follows:
 
      ```YAML
      ...
        selector:
-         app: "{{ .Release.Name }}-1"
-         app: "{{ .Release.Name }}-2"
+         app1: "{{ .Release.Name }}-1"
+         app2: "{{ .Release.Name }}-2"
      ...
      ```
 
@@ -84,7 +85,7 @@
           image: registry.access.redhat.com/ubi8-minimal:8.7-1031
           workingDir: /workspace/output
           command: ["/bin/bash", "-c"]
-          args: ["curl ${SERVICE}:${PORT}/health/liveliness | grep ${TEST} || exit 1"]
+          args: ["curl ${SERVICE}:${PORT}/health/liveliness || exit 1"]
           env:
             - name: SERVICE
               value: {{ .Release.Name }}-service
@@ -110,21 +111,21 @@
    - add to the values.yaml the following section:
 
    ```YAML
-   test: Healty
+   test: Healthy
    ```
 
    - Update the index.html file again and see what happens.
      - Replace "ArgoCD SyncWaves" with "ArgoCD SyncHooks Test"
 
-   - see that the sync is successfull.✅💚
+   - see that the sync is successful.✅💚
 
-   - Now change the value of key test so it will fail the sync, Set test: Null
+   - Now change the value of the key test so it will fail the sync, Set test: Null
 
    - sync the application and let the sync run.
 
-   - Set the key, test: Healty ,in the values.yaml file
+   - Set the key, test: Healthy, in the values.yaml file
 
-   - Now let add a syncFail job that will create a new issue in our github repo, create a new file named notification.yaml, edit with the following
+   - Now let's add a syncFail job that will create a new issue in our GitHub repo, create a new file named notification.yaml, edit with the following
 
    ```YAML
    apiVersion: batch/v1
@@ -149,7 +150,7 @@
      backoffLimit: 1
    ```
 
-   - create a new file name gh-details.yaml, for this step you need to create your github account token, [How to create github token](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
+   - create a new file name gh-details.yaml, for this step you need to make your github account token, [How to create github token](https://docs.github.com/en/enterprise-server@3.4/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token)
 
    ```YAML
    apiVersion: v1
@@ -173,8 +174,8 @@
      url: <https://api.github.com/repos/{Git-userName}/{Repository-Name}/issues>
    ...
    ```
-
-   - After the first sync Open the application Details in the argoCD UI and change to the Parameters Tab and enter you token in the token field.
+   - if we store the GitHub token in our Repository GitHub will block the token, so we need to enter it directly in the ArgoCD UI.
+   - After the first sync, Open the application Details in the argoCD UI, change to the Parameters Tab, and enter your token in the token field.
    ![ArgoCD App params](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab3-part2-ui.png)
 
    - Update the index.html file again, and see the sync process.
