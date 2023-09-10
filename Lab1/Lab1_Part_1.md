@@ -119,7 +119,7 @@ docker build . -t quay.io/<quay-userName>/<imageName>:v1
 
 and wait for it to finish
 
-navigate to www.quay.io, and login with your qauy username and password
+navigate to <www.quay.io>, and login with your qauy username and password
 
 - Click on "+ Create New Repository".
 - enter the image name you enter in the docker build step.
