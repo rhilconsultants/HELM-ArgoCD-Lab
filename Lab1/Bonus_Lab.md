@@ -155,7 +155,7 @@
       - Sync Policy = Automatic (check the prune & Auto Heal)
       - Repository URL = Your Git Clone URL
       - Revision = main
-      - ClusterUrl= 'https://kubernetes.default.svc'
+      - ClusterUrl= '<https://kubernetes.default.svc>'
       - Namespace = user{n}-application
 
    And click create!

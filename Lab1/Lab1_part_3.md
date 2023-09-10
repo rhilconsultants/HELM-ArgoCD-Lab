@@ -281,9 +281,9 @@
     - Navigate to our HTML folder under the src folder
     - Replace "K8S Application" With "Helm Chart Application"
     - Replace "this message will be modifed" With "Deployed with HELM and ArgoCD"
-    - Add under < img src="https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?itok=g0Ee8H1H" alt="OpenShift" > 
-      a new image: 
-      "< img src="https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-sync-flow.png" >"
+    - Add under < img src="<https://developers.redhat.com/sites/default/files/styles/article_feature/public/blog/2018/05/openshift-featured.png?itok=g0Ee8H1H>" alt="OpenShift" >
+      a new image:
+      "< img src="<https://redhat-scholars.github.io/argocd-tutorial/argocd-tutorial/_images/argocd-sync-flow.png>" >"
     - Don't forget to clean the white spaces after "<" and before ">" of the  new image.
 
 add,commit, and push the file to the git repo
