@@ -1,6 +1,6 @@
 # HELM-ArgoCD-Lab1-Bonus
 
-## In this lab we will create a Canary Route For a Blue green Deployments using the range operator in helm.
+## In this lab we will create a Canary Route For a Blue green Deployments using the range operator in helm
 
 1. Create a new Application Deployment files:
 

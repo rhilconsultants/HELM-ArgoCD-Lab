@@ -268,7 +268,7 @@
       - Repository URL, copy your git clone URL.
       - revision: main
       - Path: Application/helm/
-      - Destination: 'https://kubernetes.default.svc'
+      - Destination: '<https://kubernetes.default.svc>'
       - Namespace: user{n}-application
 
     and click create.
