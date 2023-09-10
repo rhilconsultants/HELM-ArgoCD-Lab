@@ -1,8 +1,8 @@
 # HELM-ArgoCD-Lab1-Bonus
 
-## In this lab we will create a Canary Route or our 2 Applications
+## In this lab we will create a Canary Route For a Blue green Deployments using the range operator in helm.
 
-1. Create a new route.yaml
+1. Create a new Application Deployment files:
 
    - create a new folder named  "blue-green" in the root of the repo.
 
@@ -10,38 +10,138 @@
      mkdir blue-green
      ```
 
-   - Create a new route file named "blue-green.yaml"
+   - Create a Helm Chart in the folder"
 
      ```Bash
-     touch blue-green/blue-green.yaml
+     touch blue-green/Chart.yaml
      ```
 
-   - Edit the blue-green.yaml with the Following context
+   - Edit the Chart.yaml with the Following context
+
+   ```YAML
+   apiVersion: v2
+   name: blue-green
+   description: A Helm chart for Kubernetes
+   type: application
+   version: 1.0.0
+   appVersion: "1.0.0"
+   ```
+
+   create a values.yaml file:
+
+   ```YAML
+   deployment:
+     - name: blue
+       replicas: 1
+       color: blue
+       weight: 5
+   ```
+
+   - Create a new templates folder in the blue-green folder:
+
+     ```Bash
+     mkdir blue-green/templates
+     ```
+
+   - under it create the following files:
+
+    deployment.yaml
 
      ```YAML
-     kind: Route
-     apiVersion: route.openshift.io/v1
-     metadata:
-       name: blue-green-route
-       annotations:
-         haproxy.router.openshift.io/disable_cookies:'true'
-         haproxy.router.openshift.io/balance:'roundrobin'
-     spec:
-       to:
-         kind: Service
-         name: user{n}-hello-chart-service
-         weight: 90
-       alternateBackends:
-       - kind: Service
-         name: user{n}-hello-world
-         weight: 10
+    {{- range .Values.deployment }}
+    ---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: {{ .name }}
+      name: {{ .name }}
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: {{ .name }}
+      strategy: {}
+      template:
+        metadata:
+          labels:
+            app: {{ .name }}
+        spec:
+          containers:
+          - image: quay.io/rhdevelopers/bgd:1.0.0
+            name: {{ .name }}
+            env:
+            - name: COLOR
+              value: {{ .color }}
+            resources: {}
+            securityContext:
+              allowPrivilegeEscalation: false
+              capabilities:
+                drop:
+                - ALL
+          securityContext:
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
+    {{- end }}
      ```
+
+    service.yaml file
+
+    ```YAML
+    {{- range .Values.deployment }}
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      labels:
+        app: {{ .name }}
+      name: {{ .name }}
+    spec:
+      ports:
+      - port: 8080
+        protocol: TCP
+        targetPort: 8080
+      selector:
+        app: {{ .name }}
+    {{- end }}
+    ```
+
+    route.yaml
+
+    ```YAML
+    apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      labels:
+        app: blue-green
+      name: blue-green
+      annotations:
+        haproxy.router.openshift.io/disable_cookies: 'true'
+        haproxy.router.openshift.io/balance: 'roundrobin'
+    spec:
+      port:
+        targetPort: 8080
+      to:
+        kind: Service
+        name: blue-green
+        weight: 0
+      alternateBackends:
+    {{- range .Values.deployment }}
+      - kind: Service
+        name: {{ .name }}
+        weight: {{ .weight }}
+    {{- end }}
+    ```
+
+    > Note that the blue green service have 0 weight so no traffic will be transport to it
+    > The route object support up to 3 Backends services!!
 
    add ,commit and push the file to the git repo
 
      ```bash
      git add.
-     git commit -m "create a blue-green route"
+     git commit -m "create a blue-green chart"
      git push
      ```
 
@@ -66,11 +166,16 @@
 
 3. change route wights for services.
 
-   - edit the blue-green.yaml
+   - edit the values.yaml
 
-   change the wight for the chart service to 0 and for the hello-world service to 100.
+   add a new array under deploymnet
 
-   add ,commit and push the file to the git repo
+   ```YAML
+     - name: green
+       replicas: 1
+       color: green
+       weight: 5
+   ```
 
      ```bash
      git add.
@@ -80,10 +185,10 @@
 
    wait for argo to refresh and sync or just sync it manualy.
 
-   and try now to refresh the page. or even open it in incognito or try diffrent browser.
+   now wait for the bobbles you should have blue and green bubbles.
 
-   play with the service wights and see if you trigger diffrent pages
+   add a 3rd color (i.e "yellow) and see what happens.
 
-   TIP, try to scale on deployment from 3 to 1 and see what is going on.
+   play with the service wights and see what happens to the bubbles in the page.
 
 ## Great Job You have Finished the Bonus Lab
