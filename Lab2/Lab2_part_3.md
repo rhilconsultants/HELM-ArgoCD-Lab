@@ -31,3 +31,46 @@ for this step you need to make your github account token, [How to create github 
     If everything is succesful we will get:
     > Pushed: localhost:5000/helm-charts/mychart:0.1.0
     > Digest: sha256:ec5f08ee7be8b557cd1fc5ae1a0ac985e8538da7c93f51a51eff4b277509a723
+
+4. Now lets create a new folder in our Repository root, named "sub_chart"
+
+    ```Bash
+    mkdir sub_chart
+    ```
+
+    in the folder we will create the follwoing files:
+
+    Chart.yaml
+
+    ```YAML
+    apiVersion: v2
+    name: workshop-test
+    description: A Helm chart for Kubernetes
+    type: application
+    dependencies:
+      - name: <<Name-of-Your-Chart>>
+      repository: oci://ghcr.io/<<Git-Hub-User>>/helm/
+      version: "1.0.0"
+      alias: deploy
+    version: 1.0.0
+    appVersion: "1.0.0"
+    ```
+
+    values.yaml
+
+    ```YAML
+    deploy: 
+      ReplicaNumber: 1
+  
+      containers:
+          containerPort: 8080
+          image: 'quay.io/argo-helm-workshop/workshop-app'
+          tag: 'chart_v2'
+  
+      service:
+          servicePort: 8080
+    ```
+
+    and a 2 folders named "charts" and "templates", in each one of them create an empty file named ".gitkeep"
+
+    
