@@ -30,11 +30,11 @@
    cp ../yaml/* ./templates/
    ```
 
-4. Open the Chart.yaml file and Copy the Following Context:
+4. Open the Chart.yaml file and Copy the Following Context, Dont Forget to replace the name with your git repository name:
 
    ```YAML
    apiVersion: v2
-   name: hello-world
+   name: <<Name of Your Reposity>>
    description: A Helm chart for Kubernetes
    type: application
    version: 1.0.0
