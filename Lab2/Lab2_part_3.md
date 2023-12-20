@@ -49,9 +49,9 @@ for this step you need to make your github account token, [How to create github 
     type: application
     dependencies:
       - name: <<Name-of-Your-Chart>>
-      repository: oci://ghcr.io/<<Git-Hub-User>>/helm/
-      version: "1.0.0"
-      alias: deploy
+        repository: oci://ghcr.io/<<Git-Hub-User>>/helm/
+        version: "1.0.0"
+        alias: deploy
     version: 1.0.0
     appVersion: "1.0.0"
     ```
@@ -73,4 +73,3 @@ for this step you need to make your github account token, [How to create github 
 
     and a 2 folders named "charts" and "templates", in each one of them create an empty file named ".gitkeep"
 
-    
