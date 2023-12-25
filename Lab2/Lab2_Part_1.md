@@ -17,7 +17,7 @@
    kind: ConfigMap
    apiVersion: v1
    metadata:
-     name: index.html
+     name: '{{ .Chart.Name }}-html'
    immutable: false
    data:
      index.html: |-
@@ -77,7 +77,7 @@
          volumes:
            - name: index-html
              configMap:
-               name: index.html
+               name: '{{ .Chart.Name }}-html'
                defaultMode: 420
    ...  # This will mount our File to the Pod File system
          containers:
@@ -111,7 +111,7 @@
    apiVersion: v1
    kind: ConfigMap
    metadata:
-     name: index.html
+     name: '{{ .Chart.Name }}-html'
    immutable: false
    data:
    {{ (.Files.Glob "html/*").AsConfig | indent 2 }}

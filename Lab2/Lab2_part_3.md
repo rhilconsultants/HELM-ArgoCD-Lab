@@ -75,3 +75,46 @@ for this step you need to make your github account token, [How to create github 
     the folder and files should look something like this:
 
     ![subchart-folder](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/sub-chart-folder-n-files.png)
+
+5. Now we will create a new ArgoCD application, for the sub-chart.
+
+    Click on the "+ NEW APP" button on the argoCD UI and fill the form as follows:
+    Under General:
+    - Application Name: user{n}-sub-chart
+    - Project Name: default
+    - SYNC Policy: automatic, and check the Prune and self-heal check boxs
+    Under Source:
+    - Repository Url: your Git Hub Repository Url
+    - Revision: main
+    - Path: sub_chart
+    Destination:
+    - Cluster URL: Select "https://kubernetes.default.svc"
+    - Namespace: user{n}-application
+
+    Then click create, a new argo application will be created and will began syncing, wait for it to be in healthy and Synced state.
+
+6. Now we will add a 2nd sub chart based on the same Chart package that we created.
+
+    - edit the Chart.yaml file, add a 2nd ependencies:
+
+    ```YAML
+    - name: workshop-test
+      repository: "oci://ghcr.io/tal-hason/helm"
+      version: 1.0.1
+      alias: deploy2
+    ```
+
+    - edit the values.yaml file, add a the deploy2 section:
+
+    ```YAML
+    deploy2: 
+      ReplicaNumber: 1
+
+      containers:
+        containerPort: 8080
+        image: 'quay.io/argo-helm-workshop/workshop-app'
+        tag: 'chart_v2'
+
+      service:
+        servicePort: 8080
+    ```

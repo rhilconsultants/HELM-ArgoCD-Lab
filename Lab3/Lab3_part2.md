@@ -17,7 +17,7 @@
       argocd.argoproj.io/sync-wave: "5"
    ```
 
-   - Update all the Section that contains {{ .Release.Name }} to {{ .Release.Name }}-1
+   - Update all the Section that contains {{ .Chart.Name }} to {{ .Chart.Name }}-1
    - change the Selector label from app to app1: & app2: according to the deployment file.
    - Go to the deployment_2.yaml file under helm/templates
      - Add the following section, to deployment_2.yaml
@@ -29,14 +29,14 @@
         argocd.argoproj.io/sync-wave: "10"
     ```
 
-   - Update all the Section that contains {{ .Release.Name }} to {{ .Release.Name }}-2
+   - Update all the Section that contains {{ .Chart.Name }} to {{ .Chart.Name }}-2
    - Edit the service.yaml file, change the selector section, as follows:
 
      ```YAML
      ...
        selector:
-         app1: "{{ .Release.Name }}-1"
-         app2: "{{ .Release.Name }}-2"
+         app1: "{{ .Chart.Name }}-1"
+         app2: "{{ .Chart.Name }}-2"
      ...
      ```
 
@@ -88,7 +88,7 @@
           args: ["curl ${SERVICE}:${PORT}/health/liveliness || exit 1"]
           env:
             - name: SERVICE
-              value: {{ .Release.Name }}-service
+              value: {{ .Chart.Name }}-service
             - name: PORT
               value: {{ .Values.service.servicePort }}
      backoffLimit: 1
@@ -174,6 +174,7 @@
      url: <https://api.github.com/repos/{Git-userName}/{Repository-Name}/issues>
    ...
    ```
+
    - if we store the GitHub token in our Repository GitHub will block the token, so we need to enter it directly in the ArgoCD UI.
    - After the first sync, Open the application Details in the argoCD UI, change to the Parameters Tab, and enter your token in the token field.
    ![ArgoCD App params](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab3-part2-ui.png)

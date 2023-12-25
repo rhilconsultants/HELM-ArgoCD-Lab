@@ -43,11 +43,11 @@
 
 5. Edit the "templates/Deployment.yaml" file as Following:
 
-   - the value of "metadata: -> name:" change to {{ .Release.Name }}
+   - the value of "metadata: -> name:" change to {{ .Chart.Name }}
    - the value of "spec: -> replica:" cchange to {{ .Values.ReplicaNumber }}
-   - the value of "spec: -> selector: -> matchLabels: change to {{ .Release.Name }}
-   - the value of "spec: -> emplate: -> metadata: -> labels: -> app:" change to {{ .Release.Name }}
-   - the value of "spec: -> contianer: -> name:" change to {{ .Release.Name }}
+   - the value of "spec: -> selector: -> matchLabels: change to {{ .Chart.Name }}
+   - the value of "spec: -> emplate: -> metadata: -> labels: -> app:" change to {{ .Chart.Name }}
+   - the value of "spec: -> contianer: -> name:" change to {{ .Chart.Name }}
    - the value of "spec: -> contianer: -> ports: -> containerPort:" change to {{ .Values.containers.containerPort }}
    - the value of "spec: -> contianer: -> image:" change to {{ .Values.containers.image }}:{{ .Values.containers.tag }}
 
@@ -57,21 +57,21 @@
      kind: Deployment
      apiVersion: apps/v1
      metadata:
-       name: {{ .Release.Name }}
+       name: {{ .Chart.Name }}
      spec:
        replicas: {{ .Values.ReplicaNumber }}
        selector:
          matchLabels:
-           app: {{ .Release.Name }}
+           app: {{ .Chart.Name }}
        template:
          metadata:
            labels:
-             app: {{ .Release.Name }}
+             app: {{ .Chart.Name }}
          spec:
            containers:
              - resources: {}
                terminationMessagePath: /dev/termination-log
-               name: {{ .Release.Name }}
+               name: {{ .Chart.Name }}
                ports:
                  - containerPort: {{ .Values.containers.containerPort }}
                    protocol: TCP
@@ -98,8 +98,8 @@
 
 6. Edit the "templates/service.yaml" file as Following:
 
-   - The value of "metadata: -> name" change to {{ .Release.Name }}-service
-   - The value of "spec: -> selector: -> app" change to {{ .Release.Name }}
+   - The value of "metadata: -> name" change to {{ .Chart.Name }}-service
+   - The value of "spec: -> selector: -> app" change to {{ .Chart.Name }}
    - The value of "spec: -> ports: -> port" change it to {{ .Values.service.servicePort }}
    - The value of "spec: -> ports: -> targetPort" change it to {{ .Values.containers.containerPort }}
 
@@ -109,14 +109,14 @@
      kind: Service
      apiVersion: v1
      metadata:
-       name: {{ .Release.Name }}-service
+       name: {{ .Chart.Name }}-service
      spec:
        ports:
          - protocol: TCP
            port: {{ .Values.service.servicePort }}
            targetPort: {{ .Values.containers.containerPort }}
        selector:
-         app: {{ .Release.Name }}
+         app: {{ .Chart.Name }}
      ```
 
    add ,commit and push the file to the git repo
@@ -129,8 +129,8 @@
   
 7. Edit the "templates/route.yaml" file as Following:
 
-   - The value of "metadata: -> name" change it to {{ .Release.Name }}-route
-   - The value of "spec: -> to: -> name" change it to {{ .Release.Name }}-service
+   - The value of "metadata: -> name" change it to {{ .Chart.Name }}-route
+   - The value of "spec: -> to: -> name" change it to {{ .Chart.Name }}-service
    - The value of "spec: -> port: -> targetPort" change it to {{ .Values.service.servicePort }}
 
    the edited file should look like this:
@@ -139,11 +139,11 @@
      kind: Route
      apiVersion: route.openshift.io/v1
      metadata:
-       name: {{ .Release.Name }}-route
+       name: {{ .Chart.Name }}-route
      spec:
        to:
          kind: Service
-         name: {{ .Release.Name }}-service
+         name: {{ .Chart.Name }}-service
          weight: 100
        port:
          targetPort: {{ .Values.service.servicePort }}
@@ -161,7 +161,7 @@
 8. Edit the values.yaml file accourding to our template values.
 
    - every section that we edited that have the {{ .Values }} in it need to be in the values file or enter manualy with --set option.
-   - the {{ .Release.Name }} value is created from the release of the chart creation.
+   - the {{ .Chart.Name }} value is created from the release of the chart creation.
    - Open the values.yaml file and create the following Context:
 
      ```YAML
