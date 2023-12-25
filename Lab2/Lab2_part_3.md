@@ -120,3 +120,11 @@ for this step you need to make your github account token, [How to create github 
       service:
         servicePort: 8080
     ```
+
+    After this sync or refresh our sub-chart argo application, it will create a 2nd deployment service route and config-map.
+
+    it should look like this:
+
+    ![Sub-chart-deployed](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/sub-chart-deployed.png)
+
+    
