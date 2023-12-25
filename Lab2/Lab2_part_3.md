@@ -132,3 +132,5 @@ for this step you need to make your github account token, [How to create github 
     it should look like this:
 
     ![Sub-chart-deployed](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/sub-chart-deployed.png)
+
+## Great Jog You have Finished Part 3
