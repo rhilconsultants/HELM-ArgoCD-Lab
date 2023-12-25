@@ -1,3 +1,9 @@
+<style>
+  body {
+    background-color: #f2f2f2; /* You can replace this with your preferred color code */
+  }
+</style>
+
 # Welcom to Application Deployment with ArgoCD and HELM Workshop
 
 ![Lab logo](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/Workshop-logo.png?raw=true)
