@@ -6,7 +6,7 @@
 
 ---
 
-*We will edit some parts in the helm folder and also edit the sub chart*
+### We will edit some parts in the helm folder and also edit the sub chart
 
 1. In the Helm folder in our source helm package add the following annotation, and add the value of it to the value file.
 
