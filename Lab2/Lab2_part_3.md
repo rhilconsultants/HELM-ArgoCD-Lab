@@ -81,15 +81,21 @@ for this step you need to make your github account token, [How to create github 
 5. Now we will create a new ArgoCD application, for the sub-chart.
 
     Click on the "+ NEW APP" button on the argoCD UI and fill the form as follows:
+
     Under General:
+
     - Application Name: user{n}-sub-chart
     - Project Name: default
     - SYNC Policy: automatic, and check the Prune and self-heal check boxs
+
     Under Source:
+
     - Repository Url: your Git Hub Repository Url
     - Revision: main
     - Path: sub_chart
+
     Destination:
+
     - Cluster URL: Select "<https://kubernetes.default.svc>"
     - Namespace: user{n}-application
 
@@ -126,5 +132,3 @@ for this step you need to make your github account token, [How to create github 
     it should look like this:
 
     ![Sub-chart-deployed](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/sub-chart-deployed.png)
-
-    
