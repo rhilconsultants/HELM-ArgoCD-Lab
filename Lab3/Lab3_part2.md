@@ -6,39 +6,29 @@
 
 ---
 
-1. Create another copy of the deployment.yaml file under helm/templates and name it deployment_2.yaml
-   - Change the name of the deployment.yaml to deployment_1.yaml
-   - Add the following section, to deployment_1.yaml
+*We will edit some parts in the helm folder and also edit the sub chart*
+
+1. In the Helm folder in our source helm package add the following annotation, and add the value of it to the value file.
 
    ```YAML
    metadata:
-    name: *****
+    name: '*****'
     annotations:
-      argocd.argoproj.io/sync-wave: "5"
+      argocd.argoproj.io/sync-wave: '{{ .Values.argocd.syncwave.deployment }}'
    ```
 
-   - Update all the Section that contains {{ .Chart.Name }} to {{ .Chart.Name }}-1
-   - change the Selector label from app to app1: & app2: according to the deployment file.
-   - Go to the deployment_2.yaml file under helm/templates
-     - Add the following section, to deployment_2.yaml
+   ```YAML
+   argocd:
+     syncwave:
+        deployment: 5
+   ```
 
-    ```YAML
-    metadata:
-      name:
-      annotations:
-        argocd.argoproj.io/sync-wave: "10"
-    ```
+   - Update the Chart.yaml Version to 1.0.2 package the chart and push it to the ghcr registry.
 
-   - Update all the Section that contains {{ .Chart.Name }} to {{ .Chart.Name }}-2
-   - Edit the service.yaml file, change the selector section, as follows:
-
-     ```YAML
-     ...
-       selector:
-         app1: "{{ .Chart.Name }}-1"
-         app2: "{{ .Chart.Name }}-2"
-     ...
-     ```
+   - add this value also to the value file in the sub_chart as following:
+   - deploy1, with value 5
+   - deploy2, with value 10
+   - update the Chart.yaml in the sub_chart folder with the new chart version 1.0.2
 
    - Push to git and See what happens, Open the Helm application in the ArgoCD UI and follow the sync steps, notice the flow of the sync.
 
@@ -47,11 +37,27 @@
 
     ```YAML
     annotations:
-      argocd.argoproj.io/sync-wave: "1"
+      '{{ .Values.argocd.syncwave.configmap }}'
     ```
 
-   - Update the index.html file again and see what happens.
-     - Replace "testing automated rollout" with "ArgoCD SyncWaves"
+    add this new values to the value file, in both helm and sub_chart folder like this:
+
+    ```YAML
+    argocd:
+      syncwave: 
+        deployment: 5
+        configmap: 1
+    ```
+  
+   - Change the chart version under helm to 1.0.3, package it and push to ghcr registry.
+   - Update the Chart.yaml under sub_chart with the new dependencies version that we created.
+
+   - in the helm folder update the index.html file
+      - Update the index.html file again and see what happens.
+        - Replace "testing automated rollout" with "ArgoCD SyncWaves"
+        - update the Chart.yaml file with a new version 1.0.4
+        - package and push the new chart to ghcr.
+        - update the chart.yaml in the sub_chart folder with the new version 1.0.4
    Add, Commit and Push to the git.
 
    make other change to the index.html file ,add another header.
@@ -60,25 +66,29 @@
      <h3>Testing sync waves</h3>
      ```
 
-   push the new change and watch the flow in the ArgoCD.
+   - Update the chart version in the helm folder with a new version 1.0.5
+   - Package the new version and push it to the ghcr registery
+   - update the Chart.yaml file under sub_chart folder, edit the version only to deploy1 dependency with the new chart 1.0.5
+   - push the new change and watch the flow in the ArgoCD.
+   - access both deploy1 and deploy2 route to see if they have diffrent HTML file.
 
-2. Let's add a Job that curl the service and check if it works
+2. Let's add a Job that curl the service and check if it works, we will add this job in our sub_chart template
 
-   - Create the following job.yaml, to the helm/templates
+   - Create the following job.yaml, in the sub_chart/templates folder.
 
    ```YAML
-   apiVersion: batch/v1
-   kind: Job
-   metadata:
-     annotations:
-       argocd.argoproj.io/hook: PostSync
-       argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
-     name: test-url
-   spec:
-     template:
-       metadata:
-         name: test-url
-       spec:
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      annotations:
+        argocd.argoproj.io/hook: PostSync
+        argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+      name: test-url
+    spec:
+      template:
+        metadata:
+          name: test-url
+        spec:
         restartPolicy: Never
         containers:
         - name: test-url
@@ -88,17 +98,16 @@
           args: ["curl ${SERVICE}:${PORT}/health/liveliness || exit 1"]
           env:
             - name: SERVICE
-              value: {{ .Chart.Name }}-service
+              value: "deploy-service"
             - name: PORT
-              value: {{ .Values.service.servicePort }}
-     backoffLimit: 1
+              value: "{{ .Values.deploy.service.servicePort }}"
+      backoffLimit: 1
    ```
 
    - add, commit and push to the git.
 
-   - Update the index.html file again and see what happens.
-     - Replace "ArgoCD SyncWaves" with "ArgoCD SyncHooks"
-   - change the args to the Following:
+   - Sync the sub-cahrt application, and check the test-url job pod log, it should print "healty"
+   - change the args and add a new env variable to the job.
 
    ```YAML
            args: ["curl $SERVICE:$PORT/health/liveliness | grep $TEST || exit 1"]
@@ -108,14 +117,14 @@
            ...
    ```
 
-   - add to the values.yaml the following section:
+   - add to the values.yaml the following section, on the top part of the file:
 
    ```YAML
-   test: Healthy
+   test: Healty
+   ---
    ```
 
-   - Update the index.html file again and see what happens.
-     - Replace "ArgoCD SyncWaves" with "ArgoCD SyncHooks Test"
+   - Sync the Sub-chart and follow the test-url Job
 
    - see that the sync is successful.✅💚
 
@@ -123,9 +132,9 @@
 
    - sync the application and let the sync run.
 
-   - Set the key, test: Healthy, in the values.yaml file
+   - Set the key, test: Healty, in the values.yaml file
 
-   - Now let's add a syncFail job that will create a new issue in our GitHub repo, create a new file named notification.yaml, edit with the following
+   - Now let's add a syncFail job that will create a new issue in our GitHub repo, create a new file named notification.yaml in the sub_chart/templates folder edit with the following
 
    ```YAML
    apiVersion: batch/v1
@@ -164,7 +173,7 @@
      URL: {{ .Values.github.url | b64enc }} 
    ```
 
-   - create the following section in the values.yaml file, update the field with your details
+   - create the following section in the top part of the values.yaml file, update the field with your details
 
    ```YAML
    ...
@@ -179,15 +188,10 @@
    - After the first sync, Open the application Details in the argoCD UI, change to the Parameters Tab, and enter your token in the token field.
    ![ArgoCD App params](https://raw.githubusercontent.com/rhilconsultants/Application-Deployment-Workshop/main/Class%20artifacts/lab3-part2-ui.png)
 
-   - Update the index.html file again, and see the sync process.
-
-       ```html
-       <h3>Testing fail hook</h3>
-       ```
-
-   - if every thing was successfull the test-url job should completed succeffully.
-   - Change the test values in the values.yaml file so the url test will fail.
-   - update the index.html file again and refresh the application in the ArgoCD UI.
-   - After the Sync finish see if there is a new Issue in the GitHub Portal.
+   - sync the application again...
+      - if every thing was successfull the test-url job should completed succeffully.
+      - Change the value of test in the values.yaml file to "fail" so the url-test job will fail.
+      - Click the refersh and then Sync buttons in the ArgoCD UI
+      - After the Sync finish see if there is a new Issue in the GitHub Portal.
 
 ## Hope you enjoyed 🤪

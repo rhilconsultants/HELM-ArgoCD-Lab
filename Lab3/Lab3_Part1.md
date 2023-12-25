@@ -6,6 +6,8 @@
 
 ---
 
+We will Update our original chart under the Helm folder.
+
 1. Update the HELM chart values.yaml with the following and change the current value in the deployment file with the new helm template structure.
    - Set a new Parent Section named - "probes"
      - create a sub section named - "readiness"
@@ -23,11 +25,13 @@
        - create a key names - "successThreshold", with the value of the current successThreshold from the deployment file
        - create a key names - "failureThreshold", with the value of the current failureThreshold from the deployment file
    - If you want to try working with tpl functions, replace all the templates with a tpl function
+
       ```YAML
       # tpl exmaple
                 livenessProbe:
             {{- tpl (toYaml .Values.Probes.readiness) . | nindent 12 }}
       ```
+
    - Set a new Parent Section named - "volume"
      - create a sub section named - "mount"
        - create a key names - "path", with the value of the current mountPath from the deployment file
@@ -39,6 +43,11 @@
 
 4. Update the index.html and see the deployment rollout the new change.
    - Change the "Testing Probes buttons" to "testing automated rollout"
+
+5. Update the Chart.yaml to 1.0.1 Version to and create a new Helm Package and push it to the ghcr registry.
+
+- Navigate to the sub_chart folder and update the dependencies of deploy1 and deploy2 to the new package 1.0.1
+- Refresh/Sync the sub-chart applcation.
 
 > TIP: [HELM Tips and tricks](https://helm.sh/docs/howto/charts_tips_and_tricks/#automatically-roll-deployments)
 

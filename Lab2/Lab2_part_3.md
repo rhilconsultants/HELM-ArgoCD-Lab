@@ -115,6 +115,7 @@ for this step you need to make your github account token, [How to create github 
     - edit the values.yaml file, add a the deploy2 section:
 
     ```YAML
+    ---
     deploy2: 
       ReplicaNumber: 1
 
