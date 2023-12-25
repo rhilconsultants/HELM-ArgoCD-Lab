@@ -51,7 +51,7 @@ for this step you need to make your github account token, [How to create github 
       - name: <<Name-of-Your-Chart>>
         repository: oci://ghcr.io/<<Git-Hub-User>>/helm/
         version: "1.0.0"
-        alias: deploy
+        alias: deploy1
     version: 1.0.0
     appVersion: "1.0.0"
     ```
@@ -59,7 +59,7 @@ for this step you need to make your github account token, [How to create github 
     values.yaml
 
     ```YAML
-    deploy: 
+    deploy1: 
       ReplicaNumber: 1
   
       containers:
@@ -76,6 +76,8 @@ for this step you need to make your github account token, [How to create github 
 
     ![subchart-folder](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/sub-chart-folder-n-files.png)
 
+    - *Dont forget to commit and push the new changes before continuing to the next step.*
+
 5. Now we will create a new ArgoCD application, for the sub-chart.
 
     Click on the "+ NEW APP" button on the argoCD UI and fill the form as follows:
@@ -88,7 +90,7 @@ for this step you need to make your github account token, [How to create github 
     - Revision: main
     - Path: sub_chart
     Destination:
-    - Cluster URL: Select "https://kubernetes.default.svc"
+    - Cluster URL: Select "<https://kubernetes.default.svc>"
     - Namespace: user{n}-application
 
     Then click create, a new argo application will be created and will began syncing, wait for it to be in healthy and Synced state.
