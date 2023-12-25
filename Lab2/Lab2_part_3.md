@@ -25,7 +25,7 @@ for this step you need to make your github account token, [How to create github 
 3. Push the helm package to the ghcr.io server.
 
     ```Bash
-    helm push <<Chart-Name>>.tgz oci://ghcr.io/<<Git-Hub User Name>>/helm/Repository-Name
+    helm push <<Chart-Name>>.tgz oci://ghcr.io/<<Git-Hub User Name>>/helm
     ```
 
     If everything is succesful we will get:
@@ -72,4 +72,7 @@ for this step you need to make your github account token, [How to create github 
     ```
 
     and a 2 folders named "charts" and "templates", in each one of them create an empty file named ".gitkeep"
+    the folder and files should look something like this:
+    ![subchart-folder](https://github.com/rhilconsultants/Application-Deployment-Workshop/blob/main/Class%20artifacts/sub-chart-folder-n-files.png)
+
 
